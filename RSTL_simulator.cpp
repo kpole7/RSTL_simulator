@@ -3,6 +3,7 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
+#include <ctype.h>
 
 #define RSTL_HARDWARE_SPEED			B150
 
@@ -11,60 +12,55 @@ static int configureSerialPort(const char *DeviceName);
 int SerialDevice;
 
 
-
-
-
-void cleanup() {
-    std::cout << "\nZamykanie programu...\n";
-}
-
 int main() {
-    struct termios oldSettings, newSettings;
-    tcgetattr(STDIN_FILENO, &oldSettings); // Zapisz ustawienia terminala
-    newSettings = oldSettings;
-    newSettings.c_lflag &= ~(ICANON | ECHO); // Tryb niekanoniczny + bez echa
-    tcsetattr(STDIN_FILENO, TCSANOW, &newSettings);
-
-    char ch;
-    std::cout << "Naciśnij Ctrl+A lub 'q' aby wyjść...\n";
-    while (read(STDIN_FILENO, &ch, 1) == 1 && ch != 'q') {
-        if (ch == 1) { // Ctrl+A to kod ASCII 1
-            cleanup();
-            break;
-        }
-        std::cout << "Wciśnięto: " << (int)ch << "\n";
-    }
-
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldSettings); // Przywróć ustawienia
-    return 0;
-}
-
-
-
-
-
-#if 0
-
-int main(int argc, char **argv) {
-	std::cout << "Hello World" << std::endl;
-
-	SerialDevice = configureSerialPort( "ttyS4" );
+	SerialDevice = configureSerialPort( "/dev/ttyS4" );
 	if (SerialDevice < 0){
 		std::cout << "Port not opened" << std::endl;
 		return 0;
 	}
+    std::cout << "Port open and configured" << std::endl;
+
+    struct termios oldSettings, newSettings;
+    tcgetattr(STDIN_FILENO, &oldSettings);
+    newSettings = oldSettings;
+    newSettings.c_lflag &= ~(ICANON | ECHO); // Tryb niekanoniczny, bez echa
+    tcsetattr(STDIN_FILENO, TCSANOW, &newSettings);
+
+    while (true) {
+        fd_set readfds;
+        FD_ZERO(&readfds);
+        FD_SET(STDIN_FILENO, &readfds);
+
+        struct timeval timeout = {0, 0}; // wait 0 seconds
+        int ready = select(STDIN_FILENO + 1, &readfds, nullptr, nullptr, &timeout);
+        if (ready > 0 && FD_ISSET(STDIN_FILENO, &readfds)) {
+            char KeyCode;
+            if (read(STDIN_FILENO, &KeyCode, 1) == 1) {
+        		if ((27 == KeyCode) || ('q' == KeyCode) || (1 == KeyCode)){  // Esc, q, Ctrl+A
+                    break;
+                }
+                std::cout << "Pressed: " << (int)KeyCode << "\n";
+            }
+        }
 
 
-	while(1){
 
 
 
-	}
+
+
+
+
+
+        usleep(100000);
+    }
 
 	close( SerialDevice );
-	return 0;
+    std::cout << "Port closed" << std::endl;
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldSettings);
+    return 0;
 }
-#endif
 
 
 // This function opens and configures a serial port
