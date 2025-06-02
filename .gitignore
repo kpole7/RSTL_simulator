@@ -1,0 +1,12 @@
+# Ignore Eclipse files
+/.settings/
+.cproject
+.project
+
+# Ignore executables
+/build/
+*.o
+*.d
+RSTL_simulator
+
+
