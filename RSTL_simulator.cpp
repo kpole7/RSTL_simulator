@@ -7,10 +7,12 @@
 #include <chrono>
 #include <sys/select.h>
 #include <inttypes.h>
+#include <assert.h>
 
 #define RSTL_HARDWARE_SPEED			B19200
 
-const uint8_t FrameToBeSent[] = { 0x01, 0x03, 0x03, 0xE8, 0x00, 0x07, 0x84, 0x78 };
+const uint8_t FrameToBeSent1[] = { 0x01, 0x03, 0x03, 0xE8, 0x00, 0x07, 0x84, 0x78 };
+const uint8_t FrameToBeSent2[] = { 0x01, 0x03, 0x03, 0xEF, 0x00, 0x07, 0x35, 0xB9 };
 
 static int configureSerialPort(const char *DeviceName);
 
@@ -54,8 +56,19 @@ int main() {
                     break;
                 }
         		if ('S' == KeyCode){
-        			int n = write(SerialDevice, &FrameToBeSent, sizeof(FrameToBeSent));
-        			if (sizeof(FrameToBeSent) == n){
+        			int n = write(SerialDevice, &FrameToBeSent1, sizeof(FrameToBeSent1));
+        			if (sizeof(FrameToBeSent1) == n){
+        				TimeStart = std::chrono::high_resolution_clock::now();
+        				TestCounter = 0;
+        				std::cout << "Frame sent successfully " << std::endl;
+        			}
+        			else{
+                    	std::cout << "Error sending frame" << std::endl;
+        			}
+        		}
+        		if ('D' == KeyCode){
+        			int n = write(SerialDevice, &FrameToBeSent2, sizeof(FrameToBeSent2));
+        			if (sizeof(FrameToBeSent2) == n){
         				TimeStart = std::chrono::high_resolution_clock::now();
         				TestCounter = 0;
         				std::cout << "Frame sent successfully " << std::endl;
@@ -80,15 +93,18 @@ int main() {
 			break;
 		}
 		else if (SerialPortState > 0 && FD_ISSET(SerialDevice, &SerialReadFds)) {
-			char ReceivedByte;
-			int NumberOfReceived = read(SerialDevice, &ReceivedByte, 1); // Odczytaj 1 bajt
+			char ReceivedBytes[30];
+			int NumberOfReceived = read(SerialDevice, &ReceivedBytes[0], sizeof(ReceivedBytes));
 
-			if (NumberOfReceived == 1) {
+			if (NumberOfReceived > 0) {
+				assert( NumberOfReceived <= sizeof(ReceivedBytes));
 				TimeNow = std::chrono::high_resolution_clock::now();
 				auto Duration = std::chrono::duration_cast<std::chrono::milliseconds>(TimeNow - TimeStart);
-				std::cout << "Received: 0x" << std::hex << ((unsigned)ReceivedByte) % 256u << " ('"
-						<< (isprint(ReceivedByte) ? ReceivedByte : '.') << "') " << std::dec << Duration.count() << "ms "
-						<< (int)TestCounter << std::endl;
+				std::cout << "Time " << std::dec << Duration.count() << "ms " << (int)TestCounter << "  Received " << NumberOfReceived << "B   ";
+				for (int J=0; J < NumberOfReceived; J++){
+					std::cout << std::hex << ((unsigned)ReceivedBytes[J]) % 256u << " ";
+				}
+				std::cout << std::endl;
 			}
 			else if (NumberOfReceived == -1) {
 				std::cerr << "Error: read()" << std::endl;
