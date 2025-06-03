@@ -4,18 +4,17 @@
 #include <termios.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <chrono>
 #include <sys/select.h>
 #include <inttypes.h>
 
 #define RSTL_HARDWARE_SPEED			B19200
-
 
 const uint8_t FrameToBeSent[] = { 0x01, 0x03, 0x03, 0xE8, 0x00, 0x07, 0x84, 0x78 };
 
 static int configureSerialPort(const char *DeviceName);
 
 int SerialDevice;
-
 
 int main() {
 	SerialDevice = configureSerialPort( "/dev/ttyUSB0" );
@@ -28,8 +27,13 @@ int main() {
     struct termios oldSettings, newSettings;
     tcgetattr(STDIN_FILENO, &oldSettings);
     newSettings = oldSettings;
-    newSettings.c_lflag &= ~(ICANON | ECHO); // Tryb niekanoniczny, bez echa
+    newSettings.c_lflag &= ~(ICANON | ECHO); // non-canonical mode
     tcsetattr(STDIN_FILENO, TCSANOW, &newSettings);
+
+	auto TimeStart = std::chrono::high_resolution_clock::now();
+    auto TimeNow = TimeStart;
+
+    uint32_t TestCounter = 0;
 
     while (true) {
         fd_set KeyboardReadFds;
@@ -52,7 +56,9 @@ int main() {
         		if ('S' == KeyCode){
         			int n = write(SerialDevice, &FrameToBeSent, sizeof(FrameToBeSent));
         			if (sizeof(FrameToBeSent) == n){
-                    	std::cout << "Frame sent successfully" << std::endl;
+        				TimeStart = std::chrono::high_resolution_clock::now();
+        				TestCounter = 0;
+        				std::cout << "Frame sent successfully " << std::endl;
         			}
         			else{
                     	std::cout << "Error sending frame" << std::endl;
@@ -60,8 +66,6 @@ int main() {
         		}
             }
         }
-
-
 
         fd_set SerialReadFds;
 		FD_ZERO(&SerialReadFds);
@@ -80,8 +84,11 @@ int main() {
 			int NumberOfReceived = read(SerialDevice, &ReceivedByte, 1); // Odczytaj 1 bajt
 
 			if (NumberOfReceived == 1) {
+				TimeNow = std::chrono::high_resolution_clock::now();
+				auto Duration = std::chrono::duration_cast<std::chrono::milliseconds>(TimeNow - TimeStart);
 				std::cout << "Received: 0x" << std::hex << ((unsigned)ReceivedByte) % 256u << " ('"
-						<< (isprint(ReceivedByte) ? ReceivedByte : '.') << "')" << std::endl;
+						<< (isprint(ReceivedByte) ? ReceivedByte : '.') << "') " << std::dec << Duration.count() << "ms "
+						<< (int)TestCounter << std::endl;
 			}
 			else if (NumberOfReceived == -1) {
 				std::cerr << "Error: read()" << std::endl;
@@ -94,11 +101,8 @@ int main() {
 			// There is nothing to do
 		}
 
-
-
-
-
-        usleep(1000);
+        usleep(100);
+        TestCounter++;
     }
 
 	close( SerialDevice );
