@@ -1,0 +1,679 @@
+krzysztof:~/LocalSoftware/RSTL_simulator$ ./RSTL_simulator 
+Port open and configured; handler=3  baudrate=4800
+Pressed: 49 1
+Frame sent successfully (?M..)
+Time 4ms 	Rec 1 [1]  3f 	?
+Time 6ms 	Rec 1 [2]  4d 	?M
+Time 8ms 	Rec 1 [3]  d 	?M\r
+Time 10ms 	Rec 1 [4]  a 	?M\r\n
+Time 12ms 	Rec 1 [5]  a 	?M\r\n\n
+Time 15ms 	Rec 1 [6]  d 	?M\r\n\n\r
+Time 23ms 	Rec 1 [7]  52 	?M\r\n\n\rR
+Time 25ms 	Rec 1 [8]  65 	?M\r\n\n\rRe
+Time 27ms 	Rec 1 [9]  76 	?M\r\n\n\rRev
+Time 29ms 	Rec 1 [10]  20 	?M\r\n\n\rRev 
+Time 31ms 	Rec 1 [11]  33 	?M\r\n\n\rRev 3
+Time 34ms 	Rec 1 [12]  2e 	?M\r\n\n\rRev 3.
+Time 36ms 	Rec 1 [13]  30 	?M\r\n\n\rRev 3.0
+Time 38ms 	Rec 1 [14]  35 	?M\r\n\n\rRev 3.05
+Time 40ms 	Rec 1 [15]  20 	?M\r\n\n\rRev 3.05 
+Time 42ms 	Rec 1 [16]  52 	?M\r\n\n\rRev 3.05 R
+Time 44ms 	Rec 1 [17]  53 	?M\r\n\n\rRev 3.05 RS
+Time 46ms 	Rec 1 [18]  54 	?M\r\n\n\rRev 3.05 RST
+Time 48ms 	Rec 1 [19]  4c 	?M\r\n\n\rRev 3.05 RSTL
+Time 50ms 	Rec 1 [20]  20 	?M\r\n\n\rRev 3.05 RSTL 
+Time 52ms 	Rec 1 [21]  31 	?M\r\n\n\rRev 3.05 RSTL 1
+Time 54ms 	Rec 1 [22]  35 	?M\r\n\n\rRev 3.05 RSTL 15
+Time 56ms 	Rec 1 [23]  2d 	?M\r\n\n\rRev 3.05 RSTL 15-
+Time 58ms 	Rec 1 [24]  33 	?M\r\n\n\rRev 3.05 RSTL 15-3
+Time 61ms 	Rec 1 [25]  30 	?M\r\n\n\rRev 3.05 RSTL 15-30
+Time 63ms 	Rec 1 [26]  30 	?M\r\n\n\rRev 3.05 RSTL 15-300
+Time 65ms 	Rec 1 [27]  20 	?M\r\n\n\rRev 3.05 RSTL 15-300 
+Time 67ms 	Rec 1 [28]  53 	?M\r\n\n\rRev 3.05 RSTL 15-300 S
+Time 69ms 	Rec 1 [29]  65 	?M\r\n\n\rRev 3.05 RSTL 15-300 Se
+Time 71ms 	Rec 1 [30]  72 	?M\r\n\n\rRev 3.05 RSTL 15-300 Ser
+Time 73ms 	Rec 1 [31]  69 	?M\r\n\n\rRev 3.05 RSTL 15-300 Seri
+Time 75ms 	Rec 1 [32]  61 	?M\r\n\n\rRev 3.05 RSTL 15-300 Seria
+Time 77ms 	Rec 1 [33]  6c 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial
+Time 79ms 	Rec 1 [34]  20 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 
+Time 81ms 	Rec 1 [35]  39 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 9
+Time 83ms 	Rec 1 [36]  37 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97
+Time 86ms 	Rec 1 [37]  4a 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J
+Time 88ms 	Rec 1 [38]  2d 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-
+Time 90ms 	Rec 1 [39]  37 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7
+Time 92ms 	Rec 1 [40]  39 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-79
+Time 94ms 	Rec 1 [41]  32 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-792
+Time 96ms 	Rec 1 [42]  39 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7929
+Time 98ms 	Rec 1 [43]  d 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7929\r
+Time 100ms 	Rec 1 [44]  a 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7929\r\n
+Time 102ms 	Rec 1 [45]  a 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7929\r\n\n
+Time 104ms 	Rec 1 [46]  43 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7929\r\n\nC
+Time 106ms 	Rec 1 [47]  6f 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7929\r\n\nCo
+Time 108ms 	Rec 1 [48]  6d 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7929\r\n\nCom
+Time 110ms 	Rec 1 [49]  6d 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7929\r\n\nComm
+Time 113ms 	Rec 1 [50]  61 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7929\r\n\nComma
+Time 115ms 	Rec 1 [51]  6e 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7929\r\n\nComman
+Time 117ms 	Rec 1 [52]  64 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7929\r\n\nCommand
+Time 119ms 	Rec 1 [53]  3e 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7929\r\n\nCommand>
+Pressed: 32 2
+Frame sent successfully (?O..)
+Time 4ms 	Rec 1 [1]  3f 	?
+Time 6ms 	Rec 1 [2]  4f 	?O
+Time 8ms 	Rec 1 [3]  d 	?O\r
+Time 10ms 	Rec 1 [4]  a 	?O\r\n
+Time 12ms 	Rec 1 [5]  a 	?O\r\n\n
+Time 15ms 	Rec 1 [6]  d 	?O\r\n\n\r
+Time 17ms 	Rec 1 [7]  4c 	?O\r\n\n\rL
+Time 19ms 	Rec 1 [8]  20 	?O\r\n\n\rL 
+Time 21ms 	Rec 1 [9]  6f 	?O\r\n\n\rL o
+Time 23ms 	Rec 1 [10]  70 	?O\r\n\n\rL op
+Time 25ms 	Rec 1 [11]  65 	?O\r\n\n\rL ope
+Time 27ms 	Rec 1 [12]  72 	?O\r\n\n\rL oper
+Time 29ms 	Rec 1 [13]  61 	?O\r\n\n\rL opera
+Time 31ms 	Rec 1 [14]  74 	?O\r\n\n\rL operat
+Time 33ms 	Rec 1 [15]  69 	?O\r\n\n\rL operati
+Time 35ms 	Rec 1 [16]  6f 	?O\r\n\n\rL operatio
+Time 37ms 	Rec 1 [17]  6e 	?O\r\n\n\rL operation
+Time 40ms 	Rec 1 [18]  d 	?O\r\n\n\rL operation\r
+Time 42ms 	Rec 1 [19]  a 	?O\r\n\n\rL operation\r\n
+Time 44ms 	Rec 1 [20]  a 	?O\r\n\n\rL operation\r\n\n
+Time 46ms 	Rec 1 [21]  43 	?O\r\n\n\rL operation\r\n\nC
+Time 48ms 	Rec 1 [22]  6f 	?O\r\n\n\rL operation\r\n\nCo
+Time 50ms 	Rec 1 [23]  6d 	?O\r\n\n\rL operation\r\n\nCom
+Time 52ms 	Rec 1 [24]  6d 	?O\r\n\n\rL operation\r\n\nComm
+Time 54ms 	Rec 1 [25]  61 	?O\r\n\n\rL operation\r\n\nComma
+Time 56ms 	Rec 1 [26]  6e 	?O\r\n\n\rL operation\r\n\nComman
+Time 58ms 	Rec 1 [27]  64 	?O\r\n\n\rL operation\r\n\nCommand
+Time 60ms 	Rec 1 [28]  3e 	?O\r\n\n\rL operation\r\n\nCommand>
+Pressed: 33 3
+Frame sent successfully (?S..)
+Time 4ms 	Rec 1 [1]  3f 	?
+Time 6ms 	Rec 1 [2]  53 	?S
+Time 8ms 	Rec 1 [3]  d 	?S\r
+Time 10ms 	Rec 1 [4]  a 	?S\r\n
+Time 13ms 	Rec 1 [5]  a 	?S\r\n\n
+Time 15ms 	Rec 1 [6]  d 	?S\r\n\n\r
+Time 17ms 	Rec 1 [7]  3f 	?S\r\n\n\r?
+Time 19ms 	Rec 1 [8]  4f 	?S\r\n\n\r?O
+Time 21ms 	Rec 1 [9]  d 	?S\r\n\n\r?O\r
+Time 23ms 	Rec 1 [10]  a 	?S\r\n\n\r?O\r\n
+Time 25ms 	Rec 1 [11]  a 	?S\r\n\n\r?O\r\n\n
+Time 27ms 	Rec 1 [12]  43 	?S\r\n\n\r?O\r\n\nC
+Time 29ms 	Rec 1 [13]  6f 	?S\r\n\n\r?O\r\n\nCo
+Time 31ms 	Rec 1 [14]  6d 	?S\r\n\n\r?O\r\n\nCom
+Time 33ms 	Rec 1 [15]  6d 	?S\r\n\n\r?O\r\n\nComm
+Time 35ms 	Rec 1 [16]  61 	?S\r\n\n\r?O\r\n\nComma
+Time 38ms 	Rec 1 [17]  6e 	?S\r\n\n\r?O\r\n\nComman
+Time 40ms 	Rec 1 [18]  64 	?S\r\n\n\r?O\r\n\nCommand
+Time 42ms 	Rec 1 [19]  3e 	?S\r\n\n\r?O\r\n\nCommand>
+Pressed: 34 4
+Frame sent successfully (?C..)
+Time 4ms 	Rec 1 [1]  3f 	?
+Time 6ms 	Rec 1 [2]  43 	?C
+Time 8ms 	Rec 1 [3]  d 	?C\r
+Time 10ms 	Rec 1 [4]  a 	?C\r\n
+Time 12ms 	Rec 1 [5]  a 	?C\r\n\n
+Time 15ms 	Rec 1 [6]  d 	?C\r\n\n\r
+Time 22ms 	Rec 1 [7]  50 	?C\r\n\n\rP
+Time 24ms 	Rec 1 [8]  43 	?C\r\n\n\rPC
+Time 26ms 	Rec 1 [9]  75 	?C\r\n\n\rPCu
+Time 28ms 	Rec 1 [10]  72 	?C\r\n\n\rPCur
+Time 30ms 	Rec 1 [11]  72 	?C\r\n\n\rPCurr
+Time 33ms 	Rec 1 [12]  65 	?C\r\n\n\rPCurre
+Time 35ms 	Rec 1 [13]  6e 	?C\r\n\n\rPCurren
+Time 37ms 	Rec 1 [14]  74 	?C\r\n\n\rPCurrent
+Time 39ms 	Rec 1 [15]  20 	?C\r\n\n\rPCurrent 
+Time 41ms 	Rec 1 [16]  3d 	?C\r\n\n\rPCurrent =
+Time 43ms 	Rec 1 [17]  20 	?C\r\n\n\rPCurrent = 
+Time 45ms 	Rec 1 [18]  30 	?C\r\n\n\rPCurrent = 0
+Time 47ms 	Rec 1 [19]  2e 	?C\r\n\n\rPCurrent = 0.
+Time 49ms 	Rec 1 [20]  30 	?C\r\n\n\rPCurrent = 0.0
+Time 51ms 	Rec 1 [21]  30 	?C\r\n\n\rPCurrent = 0.00
+Time 53ms 	Rec 1 [22]  30 	?C\r\n\n\rPCurrent = 0.000
+Time 55ms 	Rec 1 [23]  20 	?C\r\n\n\rPCurrent = 0.000 
+Time 58ms 	Rec 1 [24]  41 	?C\r\n\n\rPCurrent = 0.000 A
+Time 60ms 	Rec 1 [25]  6d 	?C\r\n\n\rPCurrent = 0.000 Am
+Time 62ms 	Rec 1 [26]  70 	?C\r\n\n\rPCurrent = 0.000 Amp
+Time 64ms 	Rec 1 [27]  73 	?C\r\n\n\rPCurrent = 0.000 Amps
+Time 66ms 	Rec 1 [28]  d 	?C\r\n\n\rPCurrent = 0.000 Amps\r
+Time 68ms 	Rec 1 [29]  a 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n
+Time 70ms 	Rec 1 [30]  a 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\n
+Time 72ms 	Rec 1 [31]  43 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nC
+Time 74ms 	Rec 1 [32]  6f 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nCo
+Time 76ms 	Rec 1 [33]  6d 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nCom
+Time 78ms 	Rec 1 [34]  6d 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nComm
+Time 80ms 	Rec 1 [35]  61 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nComma
+Time 82ms 	Rec 1 [36]  6e 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nComman
+Time 85ms 	Rec 1 [37]  64 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nCommand
+Time 87ms 	Rec 1 [38]  3e 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nCommand>
+Pressed: 35 5
+Frame sent successfully (?CX..)
+Time 4ms 	Rec 1 [1]  3f 	?
+Time 6ms 	Rec 1 [2]  43 	?C
+Time 8ms 	Rec 1 [3]  58 	?CX
+Time 10ms 	Rec 1 [4]  d 	?CX\r
+Time 13ms 	Rec 1 [5]  a 	?CX\r\n
+Time 15ms 	Rec 1 [6]  a 	?CX\r\n\n
+Time 17ms 	Rec 1 [7]  d 	?CX\r\n\n\r
+Time 19ms 	Rec 1 [8]  50 	?CX\r\n\n\rP
+Time 21ms 	Rec 1 [9]  43 	?CX\r\n\n\rPC
+Time 23ms 	Rec 1 [10]  75 	?CX\r\n\n\rPCu
+Time 25ms 	Rec 1 [11]  72 	?CX\r\n\n\rPCur
+Time 27ms 	Rec 1 [12]  72 	?CX\r\n\n\rPCurr
+Time 29ms 	Rec 1 [13]  65 	?CX\r\n\n\rPCurre
+Time 32ms 	Rec 1 [14]  6e 	?CX\r\n\n\rPCurren
+Time 33ms 	Rec 1 [15]  74 	?CX\r\n\n\rPCurrent
+Time 36ms 	Rec 1 [16]  20 	?CX\r\n\n\rPCurrent 
+Time 38ms 	Rec 1 [17]  3d 	?CX\r\n\n\rPCurrent =
+Time 40ms 	Rec 1 [18]  20 	?CX\r\n\n\rPCurrent = 
+Time 42ms 	Rec 1 [19]  30 	?CX\r\n\n\rPCurrent = 0
+Time 44ms 	Rec 1 [20]  30 	?CX\r\n\n\rPCurrent = 00
+Time 46ms 	Rec 1 [21]  30 	?CX\r\n\n\rPCurrent = 000
+Time 48ms 	Rec 1 [22]  d 	?CX\r\n\n\rPCurrent = 000\r
+Time 50ms 	Rec 1 [23]  a 	?CX\r\n\n\rPCurrent = 000\r\n
+Time 52ms 	Rec 1 [24]  a 	?CX\r\n\n\rPCurrent = 000\r\n\n
+Time 54ms 	Rec 1 [25]  43 	?CX\r\n\n\rPCurrent = 000\r\n\nC
+Time 56ms 	Rec 1 [26]  6f 	?CX\r\n\n\rPCurrent = 000\r\n\nCo
+Time 58ms 	Rec 1 [27]  6d 	?CX\r\n\n\rPCurrent = 000\r\n\nCom
+Time 61ms 	Rec 1 [28]  6d 	?CX\r\n\n\rPCurrent = 000\r\n\nComm
+Time 63ms 	Rec 1 [29]  61 	?CX\r\n\n\rPCurrent = 000\r\n\nComma
+Time 65ms 	Rec 1 [30]  6e 	?CX\r\n\n\rPCurrent = 000\r\n\nComman
+Time 67ms 	Rec 1 [31]  64 	?CX\r\n\n\rPCurrent = 000\r\n\nCommand
+Time 69ms 	Rec 1 [32]  3e 	?CX\r\n\n\rPCurrent = 000\r\n\nCommand>
+Pressed: 36 6
+Frame sent successfully (MC..)
+Time 4ms 	Rec 1 [1]  4d 	M
+Time 6ms 	Rec 1 [2]  43 	MC
+Time 8ms 	Rec 1 [3]  d 	MC\r
+Time 10ms 	Rec 1 [4]  a 	MC\r\n
+Time 12ms 	Rec 1 [5]  a 	MC\r\n\n
+Time 14ms 	Rec 1 [6]  d 	MC\r\n\n\r
+Time 608ms 	Rec 1 [7]  43 	MC\r\n\n\rC
+Time 610ms 	Rec 1 [8]  75 	MC\r\n\n\rCu
+Time 612ms 	Rec 1 [9]  72 	MC\r\n\n\rCur
+Time 614ms 	Rec 1 [10]  72 	MC\r\n\n\rCurr
+Time 616ms 	Rec 1 [11]  65 	MC\r\n\n\rCurre
+Time 618ms 	Rec 1 [12]  6e 	MC\r\n\n\rCurren
+Time 620ms 	Rec 1 [13]  74 	MC\r\n\n\rCurrent
+Time 622ms 	Rec 1 [14]  20 	MC\r\n\n\rCurrent 
+Time 624ms 	Rec 1 [15]  3d 	MC\r\n\n\rCurrent =
+Time 626ms 	Rec 1 [16]  20 	MC\r\n\n\rCurrent = 
+Time 629ms 	Rec 1 [17]  30 	MC\r\n\n\rCurrent = 0
+Time 631ms 	Rec 1 [18]  2e 	MC\r\n\n\rCurrent = 0.
+Time 633ms 	Rec 1 [19]  30 	MC\r\n\n\rCurrent = 0.0
+Time 635ms 	Rec 1 [20]  32 	MC\r\n\n\rCurrent = 0.02
+Time 637ms 	Rec 1 [21]  20 	MC\r\n\n\rCurrent = 0.02 
+Time 639ms 	Rec 1 [22]  41 	MC\r\n\n\rCurrent = 0.02 A
+Time 641ms 	Rec 1 [23]  6d 	MC\r\n\n\rCurrent = 0.02 Am
+Time 643ms 	Rec 1 [24]  70 	MC\r\n\n\rCurrent = 0.02 Amp
+Time 645ms 	Rec 1 [25]  73 	MC\r\n\n\rCurrent = 0.02 Amps
+Time 647ms 	Rec 1 [26]  20 	MC\r\n\n\rCurrent = 0.02 Amps 
+Time 649ms 	Rec 1 [27]  d 	MC\r\n\n\rCurrent = 0.02 Amps \r
+Time 651ms 	Rec 1 [28]  a 	MC\r\n\n\rCurrent = 0.02 Amps \r\n
+Time 653ms 	Rec 1 [29]  a 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\n
+Time 656ms 	Rec 1 [30]  43 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nC
+Time 658ms 	Rec 1 [31]  6f 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nCo
+Time 660ms 	Rec 1 [32]  6d 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nCom
+Time 662ms 	Rec 1 [33]  6d 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nComm
+Time 664ms 	Rec 1 [34]  61 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nComma
+Time 666ms 	Rec 1 [35]  6e 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nComman
+Time 668ms 	Rec 1 [36]  64 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nCommand
+Time 670ms 	Rec 1 [37]  3e 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nCommand>
+Pressed: 37 7
+Frame sent successfully (MCX..)
+Time 4ms 	Rec 1 [1]  4d 	M
+Time 6ms 	Rec 1 [2]  43 	MC
+Time 8ms 	Rec 1 [3]  58 	MCX
+Time 10ms 	Rec 1 [4]  d 	MCX\r
+Time 13ms 	Rec 1 [5]  a 	MCX\r\n
+Time 15ms 	Rec 1 [6]  a 	MCX\r\n\n
+Time 17ms 	Rec 1 [7]  d 	MCX\r\n\n\r
+Time 454ms 	Rec 1 [8]  43 	MCX\r\n\n\rC
+Time 456ms 	Rec 1 [9]  75 	MCX\r\n\n\rCu
+Time 458ms 	Rec 1 [10]  72 	MCX\r\n\n\rCur
+Time 460ms 	Rec 1 [11]  72 	MCX\r\n\n\rCurr
+Time 462ms 	Rec 1 [12]  65 	MCX\r\n\n\rCurre
+Time 464ms 	Rec 1 [13]  6e 	MCX\r\n\n\rCurren
+Time 467ms 	Rec 1 [14]  74 	MCX\r\n\n\rCurrent
+Time 469ms 	Rec 1 [15]  20 	MCX\r\n\n\rCurrent 
+Time 471ms 	Rec 1 [16]  3d 	MCX\r\n\n\rCurrent =
+Time 473ms 	Rec 1 [17]  20 	MCX\r\n\n\rCurrent = 
+Time 475ms 	Rec 1 [18]  30 	MCX\r\n\n\rCurrent = 0
+Time 477ms 	Rec 1 [19]  30 	MCX\r\n\n\rCurrent = 00
+Time 479ms 	Rec 1 [20]  30 	MCX\r\n\n\rCurrent = 000
+Time 481ms 	Rec 1 [21]  36 	MCX\r\n\n\rCurrent = 0006
+Time 483ms 	Rec 1 [22]  d 	MCX\r\n\n\rCurrent = 0006\r
+Time 485ms 	Rec 1 [23]  a 	MCX\r\n\n\rCurrent = 0006\r\n
+Time 487ms 	Rec 1 [24]  a 	MCX\r\n\n\rCurrent = 0006\r\n\n
+Time 489ms 	Rec 1 [25]  43 	MCX\r\n\n\rCurrent = 0006\r\n\nC
+Time 491ms 	Rec 1 [26]  6f 	MCX\r\n\n\rCurrent = 0006\r\n\nCo
+Time 494ms 	Rec 1 [27]  6d 	MCX\r\n\n\rCurrent = 0006\r\n\nCom
+Time 496ms 	Rec 1 [28]  6d 	MCX\r\n\n\rCurrent = 0006\r\n\nComm
+Time 498ms 	Rec 1 [29]  61 	MCX\r\n\n\rCurrent = 0006\r\n\nComma
+Time 500ms 	Rec 1 [30]  6e 	MCX\r\n\n\rCurrent = 0006\r\n\nComman
+Time 502ms 	Rec 1 [31]  64 	MCX\r\n\n\rCurrent = 0006\r\n\nCommand
+Time 504ms 	Rec 1 [32]  3e 	MCX\r\n\n\rCurrent = 0006\r\n\nCommand>
+Pressed: 38 8
+Frame sent successfully (PC0..)
+Time 4ms 	Rec 1 [1]  50 	P
+Time 6ms 	Rec 1 [2]  43 	PC
+Time 8ms 	Rec 1 [3]  30 	PC0
+Time 10ms 	Rec 1 [4]  d 	PC0\r
+Time 12ms 	Rec 1 [5]  a 	PC0\r\n
+Time 14ms 	Rec 1 [6]  a 	PC0\r\n\n
+Time 17ms 	Rec 1 [7]  d 	PC0\r\n\n\r
+Time 38ms 	Rec 1 [8]  d 	PC0\r\n\n\r\r
+Time 40ms 	Rec 1 [9]  a 	PC0\r\n\n\r\r\n
+Time 42ms 	Rec 1 [10]  a 	PC0\r\n\n\r\r\n\n
+Time 44ms 	Rec 1 [11]  43 	PC0\r\n\n\r\r\n\nC
+Time 46ms 	Rec 1 [12]  6f 	PC0\r\n\n\r\r\n\nCo
+Time 48ms 	Rec 1 [13]  6d 	PC0\r\n\n\r\r\n\nCom
+Time 50ms 	Rec 1 [14]  6d 	PC0\r\n\n\r\r\n\nComm
+Time 52ms 	Rec 1 [15]  61 	PC0\r\n\n\r\r\n\nComma
+Time 54ms 	Rec 1 [16]  6e 	PC0\r\n\n\r\r\n\nComman
+Time 56ms 	Rec 1 [17]  64 	PC0\r\n\n\r\r\n\nCommand
+Time 58ms 	Rec 1 [18]  3e 	PC0\r\n\n\r\r\n\nCommand>
+Pressed: 39 9
+Frame sent successfully (PC0.2..)
+Time 4ms 	Rec 1 [1]  50 	P
+Time 6ms 	Rec 1 [2]  43 	PC
+Time 8ms 	Rec 1 [3]  30 	PC0
+Time 10ms 	Rec 1 [4]  2e 	PC0.
+Time 12ms 	Rec 1 [5]  32 	PC0.2
+Time 14ms 	Rec 1 [6]  d 	PC0.2\r
+Time 17ms 	Rec 1 [7]  a 	PC0.2\r\n
+Time 19ms 	Rec 1 [8]  a 	PC0.2\r\n\n
+Time 21ms 	Rec 1 [9]  d 	PC0.2\r\n\n\r
+Time 43ms 	Rec 1 [10]  d 	PC0.2\r\n\n\r\r
+Time 45ms 	Rec 1 [11]  a 	PC0.2\r\n\n\r\r\n
+Time 47ms 	Rec 1 [12]  a 	PC0.2\r\n\n\r\r\n\n
+Time 49ms 	Rec 1 [13]  43 	PC0.2\r\n\n\r\r\n\nC
+Time 51ms 	Rec 1 [14]  6f 	PC0.2\r\n\n\r\r\n\nCo
+Time 53ms 	Rec 1 [15]  6d 	PC0.2\r\n\n\r\r\n\nCom
+Time 55ms 	Rec 1 [16]  6d 	PC0.2\r\n\n\r\r\n\nComm
+Time 57ms 	Rec 1 [17]  61 	PC0.2\r\n\n\r\r\n\nComma
+Time 59ms 	Rec 1 [18]  6e 	PC0.2\r\n\n\r\r\n\nComman
+Time 61ms 	Rec 1 [19]  64 	PC0.2\r\n\n\r\r\n\nCommand
+Time 64ms 	Rec 1 [20]  3e 	PC0.2\r\n\n\r\r\n\nCommand>
+Pressed: 34 4
+Frame sent successfully (?C..)
+Time 4ms 	Rec 1 [1]  3f 	?
+Time 6ms 	Rec 1 [2]  43 	?C
+Time 8ms 	Rec 1 [3]  d 	?C\r
+Time 10ms 	Rec 1 [4]  a 	?C\r\n
+Time 13ms 	Rec 1 [5]  a 	?C\r\n\n
+Time 14ms 	Rec 1 [6]  d 	?C\r\n\n\r
+Time 24ms 	Rec 1 [7]  50 	?C\r\n\n\rP
+Time 27ms 	Rec 1 [8]  43 	?C\r\n\n\rPC
+Time 29ms 	Rec 1 [9]  75 	?C\r\n\n\rPCu
+Time 31ms 	Rec 1 [10]  72 	?C\r\n\n\rPCur
+Time 33ms 	Rec 1 [11]  72 	?C\r\n\n\rPCurr
+Time 35ms 	Rec 1 [12]  65 	?C\r\n\n\rPCurre
+Time 37ms 	Rec 1 [13]  6e 	?C\r\n\n\rPCurren
+Time 39ms 	Rec 1 [14]  74 	?C\r\n\n\rPCurrent
+Time 41ms 	Rec 1 [15]  20 	?C\r\n\n\rPCurrent 
+Time 43ms 	Rec 1 [16]  3d 	?C\r\n\n\rPCurrent =
+Time 45ms 	Rec 1 [17]  20 	?C\r\n\n\rPCurrent = 
+Time 47ms 	Rec 1 [18]  30 	?C\r\n\n\rPCurrent = 0
+Time 49ms 	Rec 1 [19]  2e 	?C\r\n\n\rPCurrent = 0.
+Time 52ms 	Rec 1 [20]  32 	?C\r\n\n\rPCurrent = 0.2
+Time 54ms 	Rec 1 [21]  31 	?C\r\n\n\rPCurrent = 0.21
+Time 56ms 	Rec 1 [22]  39 	?C\r\n\n\rPCurrent = 0.219
+Time 58ms 	Rec 1 [23]  20 	?C\r\n\n\rPCurrent = 0.219 
+Time 60ms 	Rec 1 [24]  41 	?C\r\n\n\rPCurrent = 0.219 A
+Time 62ms 	Rec 1 [25]  6d 	?C\r\n\n\rPCurrent = 0.219 Am
+Time 64ms 	Rec 1 [26]  70 	?C\r\n\n\rPCurrent = 0.219 Amp
+Time 66ms 	Rec 1 [27]  73 	?C\r\n\n\rPCurrent = 0.219 Amps
+Time 68ms 	Rec 1 [28]  d 	?C\r\n\n\rPCurrent = 0.219 Amps\r
+Time 70ms 	Rec 1 [29]  a 	?C\r\n\n\rPCurrent = 0.219 Amps\r\n
+Time 72ms 	Rec 1 [30]  a 	?C\r\n\n\rPCurrent = 0.219 Amps\r\n\n
+Time 74ms 	Rec 1 [31]  43 	?C\r\n\n\rPCurrent = 0.219 Amps\r\n\nC
+Time 76ms 	Rec 1 [32]  6f 	?C\r\n\n\rPCurrent = 0.219 Amps\r\n\nCo
+Time 79ms 	Rec 1 [33]  6d 	?C\r\n\n\rPCurrent = 0.219 Amps\r\n\nCom
+Time 81ms 	Rec 1 [34]  6d 	?C\r\n\n\rPCurrent = 0.219 Amps\r\n\nComm
+Time 83ms 	Rec 1 [35]  61 	?C\r\n\n\rPCurrent = 0.219 Amps\r\n\nComma
+Time 85ms 	Rec 1 [36]  6e 	?C\r\n\n\rPCurrent = 0.219 Amps\r\n\nComman
+Time 87ms 	Rec 1 [37]  64 	?C\r\n\n\rPCurrent = 0.219 Amps\r\n\nCommand
+Time 89ms 	Rec 1 [38]  3e 	?C\r\n\n\rPCurrent = 0.219 Amps\r\n\nCommand>
+Pressed: 36 6
+Frame sent successfully (MC..)
+Time 4ms 	Rec 1 [1]  4d 	M
+Time 6ms 	Rec 1 [2]  43 	MC
+Time 8ms 	Rec 1 [3]  d 	MC\r
+Time 10ms 	Rec 1 [4]  a 	MC\r\n
+Time 12ms 	Rec 1 [5]  a 	MC\r\n\n
+Time 15ms 	Rec 1 [6]  d 	MC\r\n\n\r
+Time 570ms 	Rec 1 [7]  43 	MC\r\n\n\rC
+Time 572ms 	Rec 1 [8]  75 	MC\r\n\n\rCu
+Time 574ms 	Rec 1 [9]  72 	MC\r\n\n\rCur
+Time 576ms 	Rec 1 [10]  72 	MC\r\n\n\rCurr
+Time 578ms 	Rec 1 [11]  65 	MC\r\n\n\rCurre
+Time 580ms 	Rec 1 [12]  6e 	MC\r\n\n\rCurren
+Time 583ms 	Rec 1 [13]  74 	MC\r\n\n\rCurrent
+Time 585ms 	Rec 1 [14]  20 	MC\r\n\n\rCurrent 
+Time 587ms 	Rec 1 [15]  3d 	MC\r\n\n\rCurrent =
+Time 589ms 	Rec 1 [16]  20 	MC\r\n\n\rCurrent = 
+Time 591ms 	Rec 1 [17]  30 	MC\r\n\n\rCurrent = 0
+Time 593ms 	Rec 1 [18]  2e 	MC\r\n\n\rCurrent = 0.
+Time 595ms 	Rec 1 [19]  30 	MC\r\n\n\rCurrent = 0.0
+Time 597ms 	Rec 1 [20]  33 	MC\r\n\n\rCurrent = 0.03
+Time 599ms 	Rec 1 [21]  20 	MC\r\n\n\rCurrent = 0.03 
+Time 601ms 	Rec 1 [22]  41 	MC\r\n\n\rCurrent = 0.03 A
+Time 603ms 	Rec 1 [23]  6d 	MC\r\n\n\rCurrent = 0.03 Am
+Time 605ms 	Rec 1 [24]  70 	MC\r\n\n\rCurrent = 0.03 Amp
+Time 607ms 	Rec 1 [25]  73 	MC\r\n\n\rCurrent = 0.03 Amps
+Time 610ms 	Rec 1 [26]  20 	MC\r\n\n\rCurrent = 0.03 Amps 
+Time 612ms 	Rec 1 [27]  d 	MC\r\n\n\rCurrent = 0.03 Amps \r
+Time 614ms 	Rec 1 [28]  a 	MC\r\n\n\rCurrent = 0.03 Amps \r\n
+Time 616ms 	Rec 1 [29]  a 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\n
+Time 618ms 	Rec 1 [30]  43 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nC
+Time 620ms 	Rec 1 [31]  6f 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nCo
+Time 622ms 	Rec 1 [32]  6d 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nCom
+Time 624ms 	Rec 1 [33]  6d 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nComm
+Time 626ms 	Rec 1 [34]  61 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nComma
+Time 628ms 	Rec 1 [35]  6e 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nComman
+Time 630ms 	Rec 1 [36]  64 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nCommand
+Time 632ms 	Rec 1 [37]  3e 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nCommand>
+Pressed: 30 0
+Frame sent successfully (PC1..)
+Time 4ms 	Rec 1 [1]  50 	P
+Time 6ms 	Rec 1 [2]  43 	PC
+Time 8ms 	Rec 1 [3]  31 	PC1
+Time 10ms 	Rec 1 [4]  d 	PC1\r
+Time 12ms 	Rec 1 [5]  a 	PC1\r\n
+Time 15ms 	Rec 1 [6]  a 	PC1\r\n\n
+Time 17ms 	Rec 1 [7]  d 	PC1\r\n\n\r
+Time 38ms 	Rec 1 [8]  d 	PC1\r\n\n\r\r
+Time 40ms 	Rec 1 [9]  a 	PC1\r\n\n\r\r\n
+Time 42ms 	Rec 1 [10]  a 	PC1\r\n\n\r\r\n\n
+Time 44ms 	Rec 1 [11]  43 	PC1\r\n\n\r\r\n\nC
+Time 47ms 	Rec 1 [12]  6f 	PC1\r\n\n\r\r\n\nCo
+Time 49ms 	Rec 1 [13]  6d 	PC1\r\n\n\r\r\n\nCom
+Time 51ms 	Rec 1 [14]  6d 	PC1\r\n\n\r\r\n\nComm
+Time 53ms 	Rec 1 [15]  61 	PC1\r\n\n\r\r\n\nComma
+Time 55ms 	Rec 1 [16]  6e 	PC1\r\n\n\r\r\n\nComman
+Time 57ms 	Rec 1 [17]  64 	PC1\r\n\n\r\r\n\nCommand
+Time 59ms 	Rec 1 [18]  3e 	PC1\r\n\n\r\r\n\nCommand>
+Pressed: 34 4
+Frame sent successfully (?C..)
+Time 4ms 	Rec 1 [1]  3f 	?
+Time 6ms 	Rec 1 [2]  43 	?C
+Time 8ms 	Rec 1 [3]  d 	?C\r
+Time 10ms 	Rec 1 [4]  a 	?C\r\n
+Time 13ms 	Rec 1 [5]  a 	?C\r\n\n
+Time 15ms 	Rec 1 [6]  d 	?C\r\n\n\r
+Time 23ms 	Rec 1 [7]  50 	?C\r\n\n\rP
+Time 26ms 	Rec 1 [8]  43 	?C\r\n\n\rPC
+Time 28ms 	Rec 1 [9]  75 	?C\r\n\n\rPCu
+Time 30ms 	Rec 1 [10]  72 	?C\r\n\n\rPCur
+Time 32ms 	Rec 1 [11]  72 	?C\r\n\n\rPCurr
+Time 34ms 	Rec 1 [12]  65 	?C\r\n\n\rPCurre
+Time 36ms 	Rec 1 [13]  6e 	?C\r\n\n\rPCurren
+Time 38ms 	Rec 1 [14]  74 	?C\r\n\n\rPCurrent
+Time 40ms 	Rec 1 [15]  20 	?C\r\n\n\rPCurrent 
+Time 42ms 	Rec 1 [16]  3d 	?C\r\n\n\rPCurrent =
+Time 44ms 	Rec 1 [17]  20 	?C\r\n\n\rPCurrent = 
+Time 46ms 	Rec 1 [18]  31 	?C\r\n\n\rPCurrent = 1
+Time 48ms 	Rec 1 [19]  2e 	?C\r\n\n\rPCurrent = 1.
+Time 51ms 	Rec 1 [20]  30 	?C\r\n\n\rPCurrent = 1.0
+Time 53ms 	Rec 1 [21]  32 	?C\r\n\n\rPCurrent = 1.02
+Time 55ms 	Rec 1 [22]  35 	?C\r\n\n\rPCurrent = 1.025
+Time 57ms 	Rec 1 [23]  20 	?C\r\n\n\rPCurrent = 1.025 
+Time 59ms 	Rec 1 [24]  41 	?C\r\n\n\rPCurrent = 1.025 A
+Time 61ms 	Rec 1 [25]  6d 	?C\r\n\n\rPCurrent = 1.025 Am
+Time 63ms 	Rec 1 [26]  70 	?C\r\n\n\rPCurrent = 1.025 Amp
+Time 65ms 	Rec 1 [27]  73 	?C\r\n\n\rPCurrent = 1.025 Amps
+Time 67ms 	Rec 1 [28]  d 	?C\r\n\n\rPCurrent = 1.025 Amps\r
+Time 69ms 	Rec 1 [29]  a 	?C\r\n\n\rPCurrent = 1.025 Amps\r\n
+Time 71ms 	Rec 1 [30]  a 	?C\r\n\n\rPCurrent = 1.025 Amps\r\n\n
+Time 73ms 	Rec 1 [31]  43 	?C\r\n\n\rPCurrent = 1.025 Amps\r\n\nC
+Time 75ms 	Rec 1 [32]  6f 	?C\r\n\n\rPCurrent = 1.025 Amps\r\n\nCo
+Time 78ms 	Rec 1 [33]  6d 	?C\r\n\n\rPCurrent = 1.025 Amps\r\n\nCom
+Time 80ms 	Rec 1 [34]  6d 	?C\r\n\n\rPCurrent = 1.025 Amps\r\n\nComm
+Time 82ms 	Rec 1 [35]  61 	?C\r\n\n\rPCurrent = 1.025 Amps\r\n\nComma
+Time 84ms 	Rec 1 [36]  6e 	?C\r\n\n\rPCurrent = 1.025 Amps\r\n\nComman
+Time 86ms 	Rec 1 [37]  64 	?C\r\n\n\rPCurrent = 1.025 Amps\r\n\nCommand
+Time 88ms 	Rec 1 [38]  3e 	?C\r\n\n\rPCurrent = 1.025 Amps\r\n\nCommand>
+Pressed: 36 6
+Frame sent successfully (MC..)
+Time 4ms 	Rec 1 [1]  4d 	M
+Time 6ms 	Rec 1 [2]  43 	MC
+Time 8ms 	Rec 1 [3]  d 	MC\r
+Time 10ms 	Rec 1 [4]  a 	MC\r\n
+Time 13ms 	Rec 1 [5]  a 	MC\r\n\n
+Time 15ms 	Rec 1 [6]  d 	MC\r\n\n\r
+Time 499ms 	Rec 1 [7]  43 	MC\r\n\n\rC
+Time 501ms 	Rec 1 [8]  75 	MC\r\n\n\rCu
+Time 503ms 	Rec 1 [9]  72 	MC\r\n\n\rCur
+Time 505ms 	Rec 1 [10]  72 	MC\r\n\n\rCurr
+Time 507ms 	Rec 1 [11]  65 	MC\r\n\n\rCurre
+Time 509ms 	Rec 1 [12]  6e 	MC\r\n\n\rCurren
+Time 511ms 	Rec 1 [13]  74 	MC\r\n\n\rCurrent
+Time 513ms 	Rec 1 [14]  20 	MC\r\n\n\rCurrent 
+Time 515ms 	Rec 1 [15]  3d 	MC\r\n\n\rCurrent =
+Time 517ms 	Rec 1 [16]  20 	MC\r\n\n\rCurrent = 
+Time 519ms 	Rec 1 [17]  30 	MC\r\n\n\rCurrent = 0
+Time 521ms 	Rec 1 [18]  2e 	MC\r\n\n\rCurrent = 0.
+Time 524ms 	Rec 1 [19]  30 	MC\r\n\n\rCurrent = 0.0
+Time 526ms 	Rec 1 [20]  33 	MC\r\n\n\rCurrent = 0.03
+Time 528ms 	Rec 1 [21]  20 	MC\r\n\n\rCurrent = 0.03 
+Time 530ms 	Rec 1 [22]  41 	MC\r\n\n\rCurrent = 0.03 A
+Time 532ms 	Rec 1 [23]  6d 	MC\r\n\n\rCurrent = 0.03 Am
+Time 534ms 	Rec 1 [24]  70 	MC\r\n\n\rCurrent = 0.03 Amp
+Time 536ms 	Rec 1 [25]  73 	MC\r\n\n\rCurrent = 0.03 Amps
+Time 538ms 	Rec 1 [26]  20 	MC\r\n\n\rCurrent = 0.03 Amps 
+Time 540ms 	Rec 1 [27]  d 	MC\r\n\n\rCurrent = 0.03 Amps \r
+Time 542ms 	Rec 1 [28]  a 	MC\r\n\n\rCurrent = 0.03 Amps \r\n
+Time 544ms 	Rec 1 [29]  a 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\n
+Time 546ms 	Rec 1 [30]  43 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nC
+Time 548ms 	Rec 1 [31]  6f 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nCo
+Time 551ms 	Rec 1 [32]  6d 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nCom
+Time 553ms 	Rec 1 [33]  6d 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nComm
+Time 555ms 	Rec 1 [34]  61 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nComma
+Time 557ms 	Rec 1 [35]  6e 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nComman
+Time 559ms 	Rec 1 [36]  64 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nCommand
+Time 561ms 	Rec 1 [37]  3e 	MC\r\n\n\rCurrent = 0.03 Amps \r\n\nCommand>
+Pressed: 21 !
+Frame sent successfully (PC1.1..)
+Time 4ms 	Rec 1 [1]  50 	P
+Time 6ms 	Rec 1 [2]  43 	PC
+Time 8ms 	Rec 1 [3]  31 	PC1
+Time 10ms 	Rec 1 [4]  2e 	PC1.
+Time 13ms 	Rec 1 [5]  31 	PC1.1
+Time 15ms 	Rec 1 [6]  d 	PC1.1\r
+Time 17ms 	Rec 1 [7]  a 	PC1.1\r\n
+Time 19ms 	Rec 1 [8]  a 	PC1.1\r\n\n
+Time 21ms 	Rec 1 [9]  d 	PC1.1\r\n\n\r
+Time 43ms 	Rec 1 [10]  d 	PC1.1\r\n\n\r\r
+Time 45ms 	Rec 1 [11]  a 	PC1.1\r\n\n\r\r\n
+Time 47ms 	Rec 1 [12]  a 	PC1.1\r\n\n\r\r\n\n
+Time 49ms 	Rec 1 [13]  43 	PC1.1\r\n\n\r\r\n\nC
+Time 51ms 	Rec 1 [14]  6f 	PC1.1\r\n\n\r\r\n\nCo
+Time 53ms 	Rec 1 [15]  6d 	PC1.1\r\n\n\r\r\n\nCom
+Time 56ms 	Rec 1 [16]  6d 	PC1.1\r\n\n\r\r\n\nComm
+Time 58ms 	Rec 1 [17]  61 	PC1.1\r\n\n\r\r\n\nComma
+Time 60ms 	Rec 1 [18]  6e 	PC1.1\r\n\n\r\r\n\nComman
+Time 62ms 	Rec 1 [19]  64 	PC1.1\r\n\n\r\r\n\nCommand
+Time 64ms 	Rec 1 [20]  3e 	PC1.1\r\n\n\r\r\n\nCommand>
+Pressed: 34 4
+Frame sent successfully (?C..)
+Time 4ms 	Rec 1 [1]  3f 	?
+Time 6ms 	Rec 1 [2]  43 	?C
+Time 8ms 	Rec 1 [3]  d 	?C\r
+Time 11ms 	Rec 1 [4]  a 	?C\r\n
+Time 13ms 	Rec 1 [5]  a 	?C\r\n\n
+Time 15ms 	Rec 1 [6]  d 	?C\r\n\n\r
+Time 24ms 	Rec 1 [7]  50 	?C\r\n\n\rP
+Time 26ms 	Rec 1 [8]  43 	?C\r\n\n\rPC
+Time 28ms 	Rec 1 [9]  75 	?C\r\n\n\rPCu
+Time 30ms 	Rec 1 [10]  72 	?C\r\n\n\rPCur
+Time 32ms 	Rec 1 [11]  72 	?C\r\n\n\rPCurr
+Time 34ms 	Rec 1 [12]  65 	?C\r\n\n\rPCurre
+Time 36ms 	Rec 1 [13]  6e 	?C\r\n\n\rPCurren
+Time 38ms 	Rec 1 [14]  74 	?C\r\n\n\rPCurrent
+Time 40ms 	Rec 1 [15]  20 	?C\r\n\n\rPCurrent 
+Time 42ms 	Rec 1 [16]  3d 	?C\r\n\n\rPCurrent =
+Time 44ms 	Rec 1 [17]  20 	?C\r\n\n\rPCurrent = 
+Time 46ms 	Rec 1 [18]  31 	?C\r\n\n\rPCurrent = 1
+Time 49ms 	Rec 1 [19]  2e 	?C\r\n\n\rPCurrent = 1.
+Time 51ms 	Rec 1 [20]  30 	?C\r\n\n\rPCurrent = 1.0
+Time 53ms 	Rec 1 [21]  39 	?C\r\n\n\rPCurrent = 1.09
+Time 55ms 	Rec 1 [22]  38 	?C\r\n\n\rPCurrent = 1.098
+Time 57ms 	Rec 1 [23]  20 	?C\r\n\n\rPCurrent = 1.098 
+Time 59ms 	Rec 1 [24]  41 	?C\r\n\n\rPCurrent = 1.098 A
+Time 61ms 	Rec 1 [25]  6d 	?C\r\n\n\rPCurrent = 1.098 Am
+Time 63ms 	Rec 1 [26]  70 	?C\r\n\n\rPCurrent = 1.098 Amp
+Time 65ms 	Rec 1 [27]  73 	?C\r\n\n\rPCurrent = 1.098 Amps
+Time 67ms 	Rec 1 [28]  d 	?C\r\n\n\rPCurrent = 1.098 Amps\r
+Time 69ms 	Rec 1 [29]  a 	?C\r\n\n\rPCurrent = 1.098 Amps\r\n
+Time 71ms 	Rec 1 [30]  a 	?C\r\n\n\rPCurrent = 1.098 Amps\r\n\n
+Time 73ms 	Rec 1 [31]  43 	?C\r\n\n\rPCurrent = 1.098 Amps\r\n\nC
+Time 75ms 	Rec 1 [32]  6f 	?C\r\n\n\rPCurrent = 1.098 Amps\r\n\nCo
+Time 78ms 	Rec 1 [33]  6d 	?C\r\n\n\rPCurrent = 1.098 Amps\r\n\nCom
+Time 80ms 	Rec 1 [34]  6d 	?C\r\n\n\rPCurrent = 1.098 Amps\r\n\nComm
+Time 82ms 	Rec 1 [35]  61 	?C\r\n\n\rPCurrent = 1.098 Amps\r\n\nComma
+Time 84ms 	Rec 1 [36]  6e 	?C\r\n\n\rPCurrent = 1.098 Amps\r\n\nComman
+Time 86ms 	Rec 1 [37]  64 	?C\r\n\n\rPCurrent = 1.098 Amps\r\n\nCommand
+Time 88ms 	Rec 1 [38]  3e 	?C\r\n\n\rPCurrent = 1.098 Amps\r\n\nCommand>
+Pressed: 36 6
+Frame sent successfully (MC..)
+Time 4ms 	Rec 1 [1]  4d 	M
+Time 6ms 	Rec 1 [2]  43 	MC
+Time 8ms 	Rec 1 [3]  d 	MC\r
+Time 10ms 	Rec 1 [4]  a 	MC\r\n
+Time 13ms 	Rec 1 [5]  a 	MC\r\n\n
+Time 15ms 	Rec 1 [6]  d 	MC\r\n\n\r
+Time 470ms 	Rec 1 [7]  43 	MC\r\n\n\rC
+Time 472ms 	Rec 1 [8]  75 	MC\r\n\n\rCu
+Time 474ms 	Rec 1 [9]  72 	MC\r\n\n\rCur
+Time 476ms 	Rec 1 [10]  72 	MC\r\n\n\rCurr
+Time 478ms 	Rec 1 [11]  65 	MC\r\n\n\rCurre
+Time 480ms 	Rec 1 [12]  6e 	MC\r\n\n\rCurren
+Time 482ms 	Rec 1 [13]  74 	MC\r\n\n\rCurrent
+Time 484ms 	Rec 1 [14]  20 	MC\r\n\n\rCurrent 
+Time 486ms 	Rec 1 [15]  3d 	MC\r\n\n\rCurrent =
+Time 488ms 	Rec 1 [16]  20 	MC\r\n\n\rCurrent = 
+Time 490ms 	Rec 1 [17]  30 	MC\r\n\n\rCurrent = 0
+Time 492ms 	Rec 1 [18]  2e 	MC\r\n\n\rCurrent = 0.
+Time 494ms 	Rec 1 [19]  30 	MC\r\n\n\rCurrent = 0.0
+Time 497ms 	Rec 1 [20]  32 	MC\r\n\n\rCurrent = 0.02
+Time 499ms 	Rec 1 [21]  20 	MC\r\n\n\rCurrent = 0.02 
+Time 501ms 	Rec 1 [22]  41 	MC\r\n\n\rCurrent = 0.02 A
+Time 503ms 	Rec 1 [23]  6d 	MC\r\n\n\rCurrent = 0.02 Am
+Time 505ms 	Rec 1 [24]  70 	MC\r\n\n\rCurrent = 0.02 Amp
+Time 507ms 	Rec 1 [25]  73 	MC\r\n\n\rCurrent = 0.02 Amps
+Time 509ms 	Rec 1 [26]  20 	MC\r\n\n\rCurrent = 0.02 Amps 
+Time 511ms 	Rec 1 [27]  d 	MC\r\n\n\rCurrent = 0.02 Amps \r
+Time 513ms 	Rec 1 [28]  a 	MC\r\n\n\rCurrent = 0.02 Amps \r\n
+Time 515ms 	Rec 1 [29]  a 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\n
+Time 517ms 	Rec 1 [30]  43 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nC
+Time 519ms 	Rec 1 [31]  6f 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nCo
+Time 522ms 	Rec 1 [32]  6d 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nCom
+Time 524ms 	Rec 1 [33]  6d 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nComm
+Time 526ms 	Rec 1 [34]  61 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nComma
+Time 528ms 	Rec 1 [35]  6e 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nComman
+Time 530ms 	Rec 1 [36]  64 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nCommand
+Time 532ms 	Rec 1 [37]  3e 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nCommand>
+Pressed: 38 8
+Frame sent successfully (PC0..)
+Time 4ms 	Rec 1 [1]  50 	P
+Time 6ms 	Rec 1 [2]  43 	PC
+Time 8ms 	Rec 1 [3]  30 	PC0
+Time 10ms 	Rec 1 [4]  d 	PC0\r
+Time 13ms 	Rec 1 [5]  a 	PC0\r\n
+Time 15ms 	Rec 1 [6]  a 	PC0\r\n\n
+Time 17ms 	Rec 1 [7]  d 	PC0\r\n\n\r
+Time 38ms 	Rec 1 [8]  d 	PC0\r\n\n\r\r
+Time 40ms 	Rec 1 [9]  a 	PC0\r\n\n\r\r\n
+Time 42ms 	Rec 1 [10]  a 	PC0\r\n\n\r\r\n\n
+Time 44ms 	Rec 1 [11]  43 	PC0\r\n\n\r\r\n\nC
+Time 46ms 	Rec 1 [12]  6f 	PC0\r\n\n\r\r\n\nCo
+Time 48ms 	Rec 1 [13]  6d 	PC0\r\n\n\r\r\n\nCom
+Time 50ms 	Rec 1 [14]  6d 	PC0\r\n\n\r\r\n\nComm
+Time 52ms 	Rec 1 [15]  61 	PC0\r\n\n\r\r\n\nComma
+Time 54ms 	Rec 1 [16]  6e 	PC0\r\n\n\r\r\n\nComman
+Time 56ms 	Rec 1 [17]  64 	PC0\r\n\n\r\r\n\nCommand
+Time 59ms 	Rec 1 [18]  3e 	PC0\r\n\n\r\r\n\nCommand>
+Pressed: 34 4
+Frame sent successfully (?C..)
+Time 4ms 	Rec 1 [1]  3f 	?
+Time 6ms 	Rec 1 [2]  43 	?C
+Time 8ms 	Rec 1 [3]  d 	?C\r
+Time 10ms 	Rec 1 [4]  a 	?C\r\n
+Time 12ms 	Rec 1 [5]  a 	?C\r\n\n
+Time 15ms 	Rec 1 [6]  d 	?C\r\n\n\r
+Time 22ms 	Rec 1 [7]  50 	?C\r\n\n\rP
+Time 24ms 	Rec 1 [8]  43 	?C\r\n\n\rPC
+Time 26ms 	Rec 1 [9]  75 	?C\r\n\n\rPCu
+Time 28ms 	Rec 1 [10]  72 	?C\r\n\n\rPCur
+Time 30ms 	Rec 1 [11]  72 	?C\r\n\n\rPCurr
+Time 33ms 	Rec 1 [12]  65 	?C\r\n\n\rPCurre
+Time 35ms 	Rec 1 [13]  6e 	?C\r\n\n\rPCurren
+Time 37ms 	Rec 1 [14]  74 	?C\r\n\n\rPCurrent
+Time 39ms 	Rec 1 [15]  20 	?C\r\n\n\rPCurrent 
+Time 41ms 	Rec 1 [16]  3d 	?C\r\n\n\rPCurrent =
+Time 43ms 	Rec 1 [17]  20 	?C\r\n\n\rPCurrent = 
+Time 45ms 	Rec 1 [18]  30 	?C\r\n\n\rPCurrent = 0
+Time 47ms 	Rec 1 [19]  2e 	?C\r\n\n\rPCurrent = 0.
+Time 49ms 	Rec 1 [20]  30 	?C\r\n\n\rPCurrent = 0.0
+Time 51ms 	Rec 1 [21]  30 	?C\r\n\n\rPCurrent = 0.00
+Time 53ms 	Rec 1 [22]  30 	?C\r\n\n\rPCurrent = 0.000
+Time 55ms 	Rec 1 [23]  20 	?C\r\n\n\rPCurrent = 0.000 
+Time 58ms 	Rec 1 [24]  41 	?C\r\n\n\rPCurrent = 0.000 A
+Time 60ms 	Rec 1 [25]  6d 	?C\r\n\n\rPCurrent = 0.000 Am
+Time 62ms 	Rec 1 [26]  70 	?C\r\n\n\rPCurrent = 0.000 Amp
+Time 64ms 	Rec 1 [27]  73 	?C\r\n\n\rPCurrent = 0.000 Amps
+Time 66ms 	Rec 1 [28]  d 	?C\r\n\n\rPCurrent = 0.000 Amps\r
+Time 68ms 	Rec 1 [29]  a 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n
+Time 70ms 	Rec 1 [30]  a 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\n
+Time 72ms 	Rec 1 [31]  43 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nC
+Time 74ms 	Rec 1 [32]  6f 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nCo
+Time 76ms 	Rec 1 [33]  6d 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nCom
+Time 78ms 	Rec 1 [34]  6d 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nComm
+Time 80ms 	Rec 1 [35]  61 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nComma
+Time 83ms 	Rec 1 [36]  6e 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nComman
+Time 85ms 	Rec 1 [37]  64 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nCommand
+Time 87ms 	Rec 1 [38]  3e 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nCommand>
+Pressed: 36 6
+Frame sent successfully (MC..)
+Time 4ms 	Rec 1 [1]  4d 	M
+Time 6ms 	Rec 1 [2]  43 	MC
+Time 8ms 	Rec 1 [3]  d 	MC\r
+Time 10ms 	Rec 1 [4]  a 	MC\r\n
+Time 12ms 	Rec 1 [5]  a 	MC\r\n\n
+Time 14ms 	Rec 1 [6]  d 	MC\r\n\n\r
+Time 528ms 	Rec 1 [7]  43 	MC\r\n\n\rC
+Time 530ms 	Rec 1 [8]  75 	MC\r\n\n\rCu
+Time 532ms 	Rec 1 [9]  72 	MC\r\n\n\rCur
+Time 534ms 	Rec 1 [10]  72 	MC\r\n\n\rCurr
+Time 536ms 	Rec 1 [11]  65 	MC\r\n\n\rCurre
+Time 538ms 	Rec 1 [12]  6e 	MC\r\n\n\rCurren
+Time 540ms 	Rec 1 [13]  74 	MC\r\n\n\rCurrent
+Time 542ms 	Rec 1 [14]  20 	MC\r\n\n\rCurrent 
+Time 544ms 	Rec 1 [15]  3d 	MC\r\n\n\rCurrent =
+Time 546ms 	Rec 1 [16]  20 	MC\r\n\n\rCurrent = 
+Time 548ms 	Rec 1 [17]  30 	MC\r\n\n\rCurrent = 0
+Time 550ms 	Rec 1 [18]  2e 	MC\r\n\n\rCurrent = 0.
+Time 553ms 	Rec 1 [19]  30 	MC\r\n\n\rCurrent = 0.0
+Time 555ms 	Rec 1 [20]  32 	MC\r\n\n\rCurrent = 0.02
+Time 557ms 	Rec 1 [21]  20 	MC\r\n\n\rCurrent = 0.02 
+Time 559ms 	Rec 1 [22]  41 	MC\r\n\n\rCurrent = 0.02 A
+Time 561ms 	Rec 1 [23]  6d 	MC\r\n\n\rCurrent = 0.02 Am
+Time 563ms 	Rec 1 [24]  70 	MC\r\n\n\rCurrent = 0.02 Amp
+Time 565ms 	Rec 1 [25]  73 	MC\r\n\n\rCurrent = 0.02 Amps
+Time 567ms 	Rec 1 [26]  20 	MC\r\n\n\rCurrent = 0.02 Amps 
+Time 569ms 	Rec 1 [27]  d 	MC\r\n\n\rCurrent = 0.02 Amps \r
+Time 571ms 	Rec 1 [28]  a 	MC\r\n\n\rCurrent = 0.02 Amps \r\n
+Time 573ms 	Rec 1 [29]  a 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\n
+Time 575ms 	Rec 1 [30]  43 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nC
+Time 577ms 	Rec 1 [31]  6f 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nCo
+Time 580ms 	Rec 1 [32]  6d 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nCom
+Time 582ms 	Rec 1 [33]  6d 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nComm
+Time 584ms 	Rec 1 [34]  61 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nComma
+Time 586ms 	Rec 1 [35]  6e 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nComman
+Time 588ms 	Rec 1 [36]  64 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nCommand
+Time 590ms 	Rec 1 [37]  3e 	MC\r\n\n\rCurrent = 0.02 Amps \r\n\nCommand>
+Pressed: 71 q
+Port closed
+krzysztof:~/LocalSoftware/RSTL_simulator$ 
+
