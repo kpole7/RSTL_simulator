@@ -9,22 +9,30 @@
 #include <inttypes.h>
 #include <assert.h>
 
-#define RSTL_HARDWARE_SPEED			B19200
+#define RSTL_HARDWARE_SPEED			B600
+#define TEXT_HARDWARE_SPEED			"600 no flow control"
 
-const uint8_t FrameToBeSent1[] = { 0x01, 0x03, 0x03, 0xE8, 0x00, 0x07, 0x84, 0x78 };
-const uint8_t FrameToBeSent2[] = { 0x01, 0x03, 0x03, 0xEF, 0x00, 0x07, 0x35, 0xB9 };
+#define FRAME_LENGTH				4
+#define FRAMES_NUMBER				3
+
+const uint8_t FrameToBeSent1[FRAME_LENGTH] = { '?', 'M', 13, 10 }; // inquiry of software revision, model, serial number
+const uint8_t FrameToBeSent2[FRAME_LENGTH] = { '?', 'O', 13, 10 }; // inquiry of local or remote operation
+const uint8_t FrameToBeSent3[FRAME_LENGTH] = { '?', 'V', 13, 10 };
+
+const uint8_t* FramesPtr[FRAMES_NUMBER] = { FrameToBeSent1, FrameToBeSent2, FrameToBeSent3 };
 
 static int configureSerialPort(const char *DeviceName);
 
 int SerialDevice;
 
 int main() {
-	SerialDevice = configureSerialPort( "/dev/ttyUSB0" );
+	SerialDevice = configureSerialPort( "/dev/ttyS4" );
 	if (SerialDevice < 0){
 		std::cout << "Port not opened" << std::endl;
 		return 0;
 	}
-    std::cout << "Port open and configured; handler " << SerialDevice << std::endl;
+    std::cout << "Port open and configured; handler=" << SerialDevice
+    		<< "  baudrate=" << TEXT_HARDWARE_SPEED << std::endl;
 
     struct termios oldSettings, newSettings;
     tcgetattr(STDIN_FILENO, &oldSettings);
@@ -55,27 +63,25 @@ int main() {
         		if ((27 == KeyCode) || ('q' == KeyCode) || (1 == KeyCode)){  // Esc, q, Ctrl+A
                     break;
                 }
-        		if ('S' == KeyCode){
-        			int n = write(SerialDevice, &FrameToBeSent1, sizeof(FrameToBeSent1));
-        			if (sizeof(FrameToBeSent1) == n){
-        				TimeStart = std::chrono::high_resolution_clock::now();
-        				TestCounter = 0;
-        				std::cout << "Frame sent successfully " << std::endl;
+        		if (('1' <= KeyCode) && (KeyCode < '1'+FRAMES_NUMBER)){
+        			int Index = KeyCode - '1';
+        			assert( Index < FRAMES_NUMBER );
+        			assert( FRAMES_NUMBER == (int)(sizeof(FramesPtr)/sizeof(FramesPtr[0])));
+
+        			int n = write(SerialDevice, FramesPtr[Index], FRAME_LENGTH);
+    				TimeStart = std::chrono::high_resolution_clock::now();
+    				TestCounter = 0;
+        			if (FRAME_LENGTH == n){
+        				std::cout << "Frame sent successfully";
         			}
         			else{
-                    	std::cout << "Error sending frame" << std::endl;
+                    	std::cout << "Error sending frame";
         			}
-        		}
-        		if ('D' == KeyCode){
-        			int n = write(SerialDevice, &FrameToBeSent2, sizeof(FrameToBeSent2));
-        			if (sizeof(FrameToBeSent2) == n){
-        				TimeStart = std::chrono::high_resolution_clock::now();
-        				TestCounter = 0;
-        				std::cout << "Frame sent successfully " << std::endl;
-        			}
-        			else{
-                    	std::cout << "Error sending frame" << std::endl;
-        			}
+    				std::cout << " (";
+    				for (int J=0; J < FRAME_LENGTH; J++){
+    					std::cout << (char)(((FramesPtr[Index][J] >= ' ') && (FramesPtr[Index][J] <= 'z'))? FramesPtr[Index][J] : '.');
+    				}
+    				std::cout << ")" << std::endl;
         		}
             }
         }
@@ -100,11 +106,15 @@ int main() {
 				assert( NumberOfReceived <= sizeof(ReceivedBytes));
 				TimeNow = std::chrono::high_resolution_clock::now();
 				auto Duration = std::chrono::duration_cast<std::chrono::milliseconds>(TimeNow - TimeStart);
-				std::cout << "Time " << std::dec << Duration.count() << "ms " << (int)TestCounter << "  Received " << NumberOfReceived << "B   ";
+				std::cout << "Time " << std::dec << Duration.count() << "ms " << (int)TestCounter << "  Received " << NumberOfReceived << " byte(s)   ";
 				for (int J=0; J < NumberOfReceived; J++){
 					std::cout << std::hex << ((unsigned)ReceivedBytes[J]) % 256u << " ";
 				}
-				std::cout << std::endl;
+				std::cout << " (";
+				for (int J=0; J < NumberOfReceived; J++){
+					std::cout << (((ReceivedBytes[J] >= ' ') && (ReceivedBytes[J] <= 'z'))? ReceivedBytes[J] : '.');
+				}
+				std::cout << ")" << std::endl;
 			}
 			else if (NumberOfReceived == -1) {
 				std::cerr << "Error: read()" << std::endl;
@@ -128,6 +138,7 @@ int main() {
     return 0;
 }
 
+#define MY_FLOW_CONTROL	1
 
 // This function opens and configures a serial port
 static int configureSerialPort(const char *DeviceName){
@@ -147,12 +158,33 @@ static int configureSerialPort(const char *DeviceName){
     cfsetispeed(&PortSettings, RSTL_HARDWARE_SPEED);
     cfsetospeed(&PortSettings, RSTL_HARDWARE_SPEED);
 
-    PortSettings.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL | IXON | IXOFF | IXANY);
     PortSettings.c_oflag = 0;                            // Disable output processing
     PortSettings.c_lflag = 0;                            // Mode 'raw'
 
-    PortSettings.c_cflag &= ~(CSIZE | CSTOPB | PARODD | CRTSCTS);
-    PortSettings.c_cflag |= (CS8 | PARENB | CREAD | CLOCAL);
+#if MY_FLOW_CONTROL == 1
+    // no flow control
+    PortSettings.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL | IXON | IXOFF | IXANY);
+
+    PortSettings.c_cflag &= ~(CSIZE | CSTOPB | PARENB | PARODD | CRTSCTS);
+    PortSettings.c_cflag |= (CS8 | CREAD | CLOCAL);
+#endif
+
+#if MY_FLOW_CONTROL == 2
+    // hardware flow control
+    PortSettings.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL | IXON | IXOFF | IXANY);
+
+    PortSettings.c_cflag &= ~(CSIZE | CSTOPB | PARENB | PARODD );
+    PortSettings.c_cflag |= (CS8 | CREAD | CLOCAL | CRTSCTS);
+#endif
+
+#if MY_FLOW_CONTROL == 3
+    // software flow control
+    PortSettings.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL);
+    PortSettings.c_iflag |= ~(IXON | IXOFF | IXANY);
+
+    PortSettings.c_cflag &= ~(CSIZE | CSTOPB | PARENB | PARODD | CRTSCTS);
+    PortSettings.c_cflag |= (CS8 | CREAD | CLOCAL);
+#endif
 
     PortSettings.c_cc[VMIN]  = 0;                        // Minimum number of bytes to read
     PortSettings.c_cc[VTIME] = 0;                        // Timeout in tenth of a second
