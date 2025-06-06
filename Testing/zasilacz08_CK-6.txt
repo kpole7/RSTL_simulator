@@ -1,0 +1,121 @@
+krzysztof:~/LocalSoftware/RSTL_simulator$ ./RSTL_simulator 
+Port open and configured; handler=3  baudrate=4800
+Time 243334ms 	Rec 8 [8]  43 6f 6d 6d 61 6e 64 3e 	Command>
+Pressed: 31 1
+Frame sent successfully (?M..)
+Time 42ms 	Rec 16 [16]  3f 4d d a a d 52 65 76 20 33 2e 30 35 20 52 	?M\r\n\n\rRev 3.05 R
+Time 75ms 	Rec 16 [32]  53 54 4c 20 31 35 2d 33 30 30 20 53 65 72 69 61 	?M\r\n\n\rRev 3.05 RSTL 15-300 Seria
+Time 108ms 	Rec 16 [48]  6c 20 39 37 4a 2d 37 39 33 31 d a a 43 6f 6d 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7931\r\n\nCom
+Time 129ms 	Rec 5 [53]  6d 61 6e 64 3e 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7931\r\n\nCommand>
+Pressed: 31 1
+Frame sent successfully (?M..)
+Time 42ms 	Rec 16 [16]  3f 4d d a a d 52 65 76 20 33 2e 30 35 20 52 	?M\r\n\n\rRev 3.05 R
+Time 75ms 	Rec 16 [32]  53 54 4c 20 31 35 2d 33 30 30 20 53 65 72 69 61 	?M\r\n\n\rRev 3.05 RSTL 15-300 Seria
+Time 108ms 	Rec 16 [48]  6c 20 39 37 4a 2d 37 39 33 31 d a a 43 6f 6d 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7931\r\n\nCom
+Time 129ms 	Rec 5 [53]  6d 61 6e 64 3e 	?M\r\n\n\rRev 3.05 RSTL 15-300 Serial 97J-7931\r\n\nCommand>
+Pressed: 32 2
+Frame sent successfully (?O..)
+Time 35ms 	Rec 16 [16]  3f 4f d a a d 4c 20 6f 70 65 72 61 74 69 6f 	?O\r\n\n\rL operatio
+Time 70ms 	Rec 12 [28]  6e d a a 43 6f 6d 6d 61 6e 64 3e 	?O\r\n\n\rL operation\r\n\nCommand>
+Pressed: 33 3
+Frame sent successfully (?S..)
+Time 35ms 	Rec 16 [16]  3f 53 d a a d 3f 4f d a a 43 6f 6d 6d 61 	?S\r\n\n\r?O\r\n\nComma
+Time 52ms 	Rec 3 [19]  6e 64 3e 	?S\r\n\n\r?O\r\n\nCommand>
+Pressed: 34 4
+Frame sent successfully (?C..)
+Time 41ms 	Rec 16 [16]  3f 43 d a a d 50 43 75 72 72 65 6e 74 20 3d 	?C\r\n\n\rPCurrent =
+Time 74ms 	Rec 16 [32]  20 30 2e 30 30 30 20 41 6d 70 73 d a a 43 6f 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nCo
+Time 97ms 	Rec 6 [38]  6d 6d 61 6e 64 3e 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nCommand>
+Pressed: 35 5
+Frame sent successfully (?CX..)
+Time 36ms 	Rec 16 [16]  3f 43 58 d a a d 50 43 75 72 72 65 6e 74 20 	?CX\r\n\n\rPCurrent 
+Time 69ms 	Rec 16 [32]  3d 20 30 30 30 d a a 43 6f 6d 6d 61 6e 64 3e 	?CX\r\n\n\rPCurrent = 000\r\n\nCommand>
+Pressed: 36 6
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 570ms 	Rec 16 [22]  43 75 72 72 65 6e 74 20 3d 20 30 2e 30 30 20 41 	MC\r\n\n\rCurrent = 0.00 A
+Time 611ms 	Rec 15 [37]  6d 70 73 20 d a a 43 6f 6d 6d 61 6e 64 3e 	MC\r\n\n\rCurrent = 0.00 Amps \r\n\nCommand>
+Pressed: 37 7
+Frame sent successfully (MCX..)
+Time 27ms 	Rec 7 [7]  4d 43 58 d a a d 	MCX\r\n\n\r
+Time 587ms 	Rec 16 [23]  43 75 72 72 65 6e 74 20 3d 20 30 30 30 30 d a 	MCX\r\n\n\rCurrent = 0000\r\n
+Time 615ms 	Rec 9 [32]  a 43 6f 6d 6d 61 6e 64 3e 	MCX\r\n\n\rCurrent = 0000\r\n\nCommand>
+Pressed: 37 7
+Frame sent successfully (MCX..)
+Time 27ms 	Rec 7 [7]  4d 43 58 d a a d 	MCX\r\n\n\r
+Time 627ms 	Rec 16 [23]  43 75 72 72 65 6e 74 20 3d 20 30 30 30 30 d a 	MCX\r\n\n\rCurrent = 0000\r\n
+Time 656ms 	Rec 9 [32]  a 43 6f 6d 6d 61 6e 64 3e 	MCX\r\n\n\rCurrent = 0000\r\n\nCommand>
+Pressed: 38 8
+Frame sent successfully (PC0..)
+Time 27ms 	Rec 7 [7]  50 43 30 d a a d 	PC0\r\n\n\r
+Time 69ms 	Rec 11 [18]  d a a 43 6f 6d 6d 61 6e 64 3e 	PC0\r\n\n\r\r\n\nCommand>
+Pressed: 39 9
+Frame sent successfully (PC0.2..)
+Time 31ms 	Rec 9 [9]  50 43 30 2e 32 d a a d 	PC0.2\r\n\n\r
+Time 73ms 	Rec 11 [20]  d a a 43 6f 6d 6d 61 6e 64 3e 	PC0.2\r\n\n\r\r\n\nCommand>
+Pressed: 34 4
+Frame sent successfully (?C..)
+Time 43ms 	Rec 16 [16]  3f 43 d a a d 50 43 75 72 72 65 6e 74 20 3d 	?C\r\n\n\rPCurrent =
+Time 77ms 	Rec 16 [32]  20 30 2e 32 31 39 20 41 6d 70 73 d a a 43 6f 	?C\r\n\n\rPCurrent = 0.219 Amps\r\n\nCo
+Time 99ms 	Rec 6 [38]  6d 6d 61 6e 64 3e 	?C\r\n\n\rPCurrent = 0.219 Amps\r\n\nCommand>
+Pressed: 36 6
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 609ms 	Rec 16 [22]  43 75 72 72 65 6e 74 20 3d 20 30 2e 30 30 20 41 	MC\r\n\n\rCurrent = 0.00 A
+Time 650ms 	Rec 15 [37]  6d 70 73 20 d a a 43 6f 6d 6d 61 6e 64 3e 	MC\r\n\n\rCurrent = 0.00 Amps \r\n\nCommand>
+Pressed: 30 0
+Frame sent successfully (PC1..)
+Time 27ms 	Rec 7 [7]  50 43 31 d a a d 	PC1\r\n\n\r
+Time 69ms 	Rec 11 [18]  d a a 43 6f 6d 6d 61 6e 64 3e 	PC1\r\n\n\r\r\n\nCommand>
+Pressed: 34 4
+Frame sent successfully (?C..)
+Time 42ms 	Rec 16 [16]  3f 43 d a a d 50 43 75 72 72 65 6e 74 20 3d 	?C\r\n\n\rPCurrent =
+Time 76ms 	Rec 16 [32]  20 31 2e 30 32 35 20 41 6d 70 73 d a a 43 6f 	?C\r\n\n\rPCurrent = 1.025 Amps\r\n\nCo
+Time 98ms 	Rec 6 [38]  6d 6d 61 6e 64 3e 	?C\r\n\n\rPCurrent = 1.025 Amps\r\n\nCommand>
+Pressed: 36 6
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 666ms 	Rec 16 [22]  43 75 72 72 65 6e 74 20 3d 20 30 2e 30 30 20 41 	MC\r\n\n\rCurrent = 0.00 A
+Time 707ms 	Rec 15 [37]  6d 70 73 20 d a a 43 6f 6d 6d 61 6e 64 3e 	MC\r\n\n\rCurrent = 0.00 Amps \r\n\nCommand>
+Pressed: 36 6
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 609ms 	Rec 16 [22]  43 75 72 72 65 6e 74 20 3d 20 30 2e 30 30 20 41 	MC\r\n\n\rCurrent = 0.00 A
+Time 650ms 	Rec 15 [37]  6d 70 73 20 d a a 43 6f 6d 6d 61 6e 64 3e 	MC\r\n\n\rCurrent = 0.00 Amps \r\n\nCommand>
+Pressed: 21 !
+Frame sent successfully (PC1.1..)
+Time 31ms 	Rec 9 [9]  50 43 31 2e 31 d a a d 	PC1.1\r\n\n\r
+Time 74ms 	Rec 11 [20]  d a a 43 6f 6d 6d 61 6e 64 3e 	PC1.1\r\n\n\r\r\n\nCommand>
+Pressed: 34 4
+Frame sent successfully (?C..)
+Time 42ms 	Rec 16 [16]  3f 43 d a a d 50 43 75 72 72 65 6e 74 20 3d 	?C\r\n\n\rPCurrent =
+Time 75ms 	Rec 16 [32]  20 31 2e 30 39 38 20 41 6d 70 73 d a a 43 6f 	?C\r\n\n\rPCurrent = 1.098 Amps\r\n\nCo
+Time 98ms 	Rec 6 [38]  6d 6d 61 6e 64 3e 	?C\r\n\n\rPCurrent = 1.098 Amps\r\n\nCommand>
+Pressed: 36 6
+Frame sent successfully (MC..)
+Time 24ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 668ms 	Rec 16 [22]  43 75 72 72 65 6e 74 20 3d 20 30 2e 30 30 20 41 	MC\r\n\n\rCurrent = 0.00 A
+Time 709ms 	Rec 15 [37]  6d 70 73 20 d a a 43 6f 6d 6d 61 6e 64 3e 	MC\r\n\n\rCurrent = 0.00 Amps \r\n\nCommand>
+Pressed: 36 6
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 563ms 	Rec 16 [22]  43 75 72 72 65 6e 74 20 3d 20 30 2e 30 30 20 41 	MC\r\n\n\rCurrent = 0.00 A
+Time 604ms 	Rec 15 [37]  6d 70 73 20 d a a 43 6f 6d 6d 61 6e 64 3e 	MC\r\n\n\rCurrent = 0.00 Amps \r\n\nCommand>
+Pressed: 38 8
+Frame sent successfully (PC0..)
+Time 27ms 	Rec 7 [7]  50 43 30 d a a d 	PC0\r\n\n\r
+Time 68ms 	Rec 11 [18]  d a a 43 6f 6d 6d 61 6e 64 3e 	PC0\r\n\n\r\r\n\nCommand>
+Pressed: 34 4
+Frame sent successfully (?C..)
+Time 41ms 	Rec 16 [16]  3f 43 d a a d 50 43 75 72 72 65 6e 74 20 3d 	?C\r\n\n\rPCurrent =
+Time 74ms 	Rec 16 [32]  20 30 2e 30 30 30 20 41 6d 70 73 d a a 43 6f 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nCo
+Time 97ms 	Rec 6 [38]  6d 6d 61 6e 64 3e 	?C\r\n\n\rPCurrent = 0.000 Amps\r\n\nCommand>
+Pressed: 36 6
+Frame sent successfully (MC..)
+Time 24ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 608ms 	Rec 16 [22]  43 75 72 72 65 6e 74 20 3d 20 30 2e 30 30 20 41 	MC\r\n\n\rCurrent = 0.00 A
+Time 649ms 	Rec 15 [37]  6d 70 73 20 d a a 43 6f 6d 6d 61 6e 64 3e 	MC\r\n\n\rCurrent = 0.00 Amps \r\n\nCommand>
+Pressed: 71 q
+Port closed
+krzysztof:~/LocalSoftware/RSTL_simulator$ 
+
