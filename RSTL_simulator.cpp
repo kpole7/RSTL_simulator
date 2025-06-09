@@ -27,7 +27,7 @@
 //.................................................................................................
 
 static const char InquiryForSerialNumber[] = "?M\r\n";
-static const char InquiryForCurrentMeasurement[] = "MCX\r\n";
+static const char InquiryForCurrentMeasurement[] = "MC\r\n";
 
 //.................................................................................................
 // Local variables
@@ -36,8 +36,11 @@ static const char InquiryForCurrentMeasurement[] = "MCX\r\n";
 static int SerialDevice;
 static char* RstlIdentifier;
 
-static double SimulationCurrentValue = 0.02;
-static uint16_t SimulationCurrentUnsignedValue;
+static double SimulationCurrentValue = 1.0;
+static double SimulationNoisyCurrentValue;
+static double SimulationSetPointValue = 0.0;
+static double SimulationTransientCoefficient1 = 0.01;
+static double SimulationTransientCoefficient2 = 0.99;
 
 //.................................................................................................
 // Local function prototypes
@@ -59,6 +62,7 @@ int main(int argc, char** argv) {
 	char TotalCommand[MAX_COMMAND_LENGTH];
 	char OutgoingResponse[1000];
 	uint16_t TimeDivider = 0;
+	bool TransientPrintout = false;
 
 	// Serial port sutup
     for (int J = 1; J < argc; J++) {
@@ -95,6 +99,31 @@ int main(int argc, char** argv) {
         if (KeyboardState > 0 && FD_ISSET(STDIN_FILENO, &KeyboardReadFds)) {
             char KeyCode;
             if (read(STDIN_FILENO, &KeyCode, 1) == 1) {
+            	if ('f' == KeyCode){
+            		SimulationTransientCoefficient1 = 0.05;
+            		SimulationTransientCoefficient2 = 0.95;
+            		std::cout << "Transient: fast" << std::endl;
+            	}
+            	if ('d' == KeyCode){
+            		SimulationTransientCoefficient1 = 0.01;
+            		SimulationTransientCoefficient2 = 0.99;
+            		std::cout << "Transient: default" << std::endl;
+            	}
+            	if ('s' == KeyCode){
+            		SimulationTransientCoefficient1 = 0.002;
+            		SimulationTransientCoefficient2 = 0.998;
+            		std::cout << "Transient: slow" << std::endl;
+            	}
+            	if ('p' == KeyCode){
+            		if (TransientPrintout){
+            			TransientPrintout = false;
+            			std::cout << "Transient printouts: off" << std::endl;
+            		}
+            		else{
+            			TransientPrintout = true;
+            			std::cout << "Transient printouts: on" << std::endl;
+            		}
+            	}
         		if ((27 == KeyCode) || ('q' == KeyCode) || (1 == KeyCode)){  // Esc, q, Ctrl+A
                     break;
                 }
@@ -129,6 +158,7 @@ int main(int argc, char** argv) {
 					// check if there is a complete command
 					if (WaitingForNewCommand && ('\n' == ReceivedBytes[J])){
 						WaitingForNewCommand = false;
+						TotalCommand[TotalReceivedBytes+1] = 0;
 						// command response
 						int OutgoingBytes = prepareResponse( &OutgoingResponse[0], sizeof(OutgoingResponse)-1, TotalCommand );
 						if (OutgoingBytes < 0){
@@ -172,17 +202,19 @@ int main(int argc, char** argv) {
 		if (0 == TimeDivider){
 			TimeDivider = 256;
 
+			SimulationCurrentValue = SimulationTransientCoefficient2 * SimulationCurrentValue + SimulationTransientCoefficient1 * SimulationSetPointValue;
+
 			double SimulationRandomFloat = drand48() - 0.5;
 			for(int J=0;J<9;J++){
 				SimulationRandomFloat += drand48() - 0.5;
 			}
-			SimulationRandomFloat *= SimulationCurrentValue/150.0; // The value of the constant was picked experimentally
-			double SimulationTemporaryValue = SimulationCurrentValue + SimulationRandomFloat;
-			if (SimulationTemporaryValue < 0){
-				SimulationCurrentUnsignedValue = 0;
+			SimulationRandomFloat *= SimulationCurrentValue/50.0; // The value of the constant was picked experimentally
+			SimulationNoisyCurrentValue = SimulationCurrentValue + SimulationRandomFloat;
+			if (SimulationNoisyCurrentValue < 0){
+				SimulationNoisyCurrentValue = 0;
 			}
-			else{
-				SimulationCurrentUnsignedValue = (uint16_t)SimulationTemporaryValue;
+			if (TransientPrintout){
+				std::cout << SimulationCurrentValue << std::endl;
 			}
 		}
 		else{
@@ -253,7 +285,7 @@ static int prepareResponse( char* OutputString, int OutputMaxLength, char* Comma
 		}
 	}
 	else if (0 == strncmp( Command, InquiryForCurrentMeasurement, sizeof(InquiryForCurrentMeasurement)-1)){
-		Result = snprintf( &OutputString[0], OutputMaxLength, "\n\rCurrent = %04X\r\n\nCommand>", SimulationCurrentUnsignedValue );
+		Result = snprintf( &OutputString[0], OutputMaxLength, "\n\rCurrent = %.2f Amps \r\n\nCommand>", SimulationNoisyCurrentValue );
 		if (Result > OutputMaxLength){
 			Result = -1;
 		}
@@ -261,12 +293,30 @@ static int prepareResponse( char* OutputString, int OutputMaxLength, char* Comma
 	else{
 		int CommandLength = strlen(Command);
 		if (CommandLength < MAX_COMMAND_LENGTH-1){
+#if 0
+			for (int J=0; 0 != Command[J]; J++){
+				if ((' ' < Command[J]) && ('z' >= Command[J])){
+					std::cout << " " << Command[J];
+				}
+				else{
+					std::cout << " 0x" << (int)Command[J];
+				}
+			}
+			std::cout << "}" << std::dec << std::endl;
+#endif
 			if (('P' == Command[0]) && ('C' == Command[1]) && ('\r' == Command[CommandLength-2]) && ('\n' == Command[CommandLength-1])){
 				char* EndPtr;
 				double CommandSetPoint = strtof( &Command[2], &EndPtr );
-
+#if 0
 				std::cout << "CommandSetPoint " << CommandSetPoint << " " << (int)(EndPtr-Command) << " " << CommandLength << std::endl;
-
+#endif
+				if ((int)(EndPtr-Command)+2 == CommandLength){ // Check if the number format is correct
+					Result = snprintf( &OutputString[0], OutputMaxLength, "\n\r\r\n\nCommand>" );
+					if (Result > OutputMaxLength){
+						Result = -1;
+					}
+					SimulationSetPointValue = CommandSetPoint;
+				}
 			}
 		}
 	}
