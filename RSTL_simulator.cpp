@@ -4,7 +4,6 @@
 #include <termios.h>
 #include <unistd.h>
 #include <ctype.h>
-#include <chrono>
 #include <sys/select.h>
 #include <inttypes.h>
 #include <assert.h>
@@ -13,56 +12,18 @@
 // Preprocessor directives
 //.................................................................................................
 
-#define SERIAL_DEVICE_PORT			"/dev/ttyS4"
-
 #define RSTL_HARDWARE_SPEED			B4800
 #define TEXT_HARDWARE_SPEED			"4800"
 
-#define FRAMES_NUMBER				11
-
-#define MAX_RESPONSE_LENGTH			100
+#define MAX_COMMAND_LENGTH			100
 
 //.................................................................................................
 // Definitions of types
 //.................................................................................................
 
-typedef struct FrameInfoStruct{
-	const uint8_t *outgoingFramePtr;
-	const uint8_t outgoingFrameLength;
-}FrameInfo;
-
 //.................................................................................................
 // Local constants
 //.................................................................................................
-
-static const uint8_t FrameToBeSent01[] = "?M\r\n";	// 1 Place Software Revision, Model and Serial number
-static const uint8_t FrameToBeSent02[] = "?O\r\n";	// 2 Local or remote operation
-static const uint8_t FrameToBeSent03[] = "?S\r\n";	// 3 Previous command string
-static const uint8_t FrameToBeSent04[] = "?C\r\n";	// 4 Current DAC programming value (decimal)
-static const uint8_t FrameToBeSent05[] = "?CX\r\n";	// 5 Current DAC programming value (hex)
-static const uint8_t FrameToBeSent06[] = "MC\r\n";	// 6 measure output current and return result in Amps format
-static const uint8_t FrameToBeSent07[] = "MCX\r\n";	// 7 measure output current and return result in hex format
-static const uint8_t FrameToBeSent08[] = "PC0\r\n";		// 8 Program Current to...
-static const uint8_t FrameToBeSent09[] = "PC0.2\r\n";	// 9 Program Current to...
-static const uint8_t FrameToBeSent10[] = "PC1\r\n";		// 0 Program Current to...
-static const uint8_t FrameToBeSent11[] = "PC1.1\r\n";	// ! Program Current to...
-
-static const FrameInfo FrameInfoTable[FRAMES_NUMBER] = {
-		{	FrameToBeSent01,	sizeof(FrameToBeSent01)-1	},
-		{	FrameToBeSent02,	sizeof(FrameToBeSent02)-1	},
-		{	FrameToBeSent03,	sizeof(FrameToBeSent03)-1	},
-		{	FrameToBeSent04,	sizeof(FrameToBeSent04)-1	},
-		{	FrameToBeSent05,	sizeof(FrameToBeSent05)-1	},
-		{	FrameToBeSent06,	sizeof(FrameToBeSent06)-1	},
-		{	FrameToBeSent07,	sizeof(FrameToBeSent07)-1	},
-		{	FrameToBeSent08,	sizeof(FrameToBeSent08)-1	},
-		{	FrameToBeSent09,	sizeof(FrameToBeSent09)-1	},
-		{	FrameToBeSent10,	sizeof(FrameToBeSent10)-1	},
-		{	FrameToBeSent11,	sizeof(FrameToBeSent11)-1	}};
-
-static_assert( FRAMES_NUMBER == (int)(sizeof(FrameInfoTable)/sizeof(FrameInfoTable[0])));
-
-static char KeybordCharacters[] = "1234567890!";
 
 //.................................................................................................
 // Local variables
@@ -80,30 +41,39 @@ static int configureSerialPort(const char *DeviceName);
 // Main function definition
 //........................................................................................................
 
-int main() {
+int main(int argc, char** argv) {
+	bool ExitFlag = false;
+	bool WaitingForNewCommand = true;
+	bool IsNewCommand = false;
 	uint16_t TotalReceivedBytes;
-	char TotalResponse[MAX_RESPONSE_LENGTH];
+	char TotalCommand[MAX_COMMAND_LENGTH];
+	char OutgoingResponse[1000];
 
-	SerialDevice = configureSerialPort( SERIAL_DEVICE_PORT );
+	// Serial port sutup
+    for (int J = 1; J < argc; J++) {
+        std::string Argument = argv[J];
+       	std::cout << "argument " << J << " [" << Argument << "]" << std::endl;
+    }
+    if ( 3 != argc ){
+    	std::cout << "Syntax error; example of a program call:  ./RSTL_simulator /dev/ttyS0 \"Rev 3.05 RSTL 7.5-300 Serial 97H-7004\"" << std::endl;
+    	return 0;
+    }
+	SerialDevice = configureSerialPort( argv[1] );
 	if (SerialDevice < 0){
 		std::cout << "Port not opened" << std::endl;
 		return 0;
 	}
-    std::cout << "Port open and configured; handler=" << SerialDevice
-    		<< "  baudrate=" << TEXT_HARDWARE_SPEED << std::endl;
 
-    struct termios oldSettings, newSettings;
+	// Keyboard reading setup
+	struct termios oldSettings, newSettings;
     tcgetattr(STDIN_FILENO, &oldSettings);
     newSettings = oldSettings;
     newSettings.c_lflag &= ~(ICANON | ECHO); // non-canonical mode
     tcsetattr(STDIN_FILENO, TCSANOW, &newSettings);
 
-	auto TimeStart = std::chrono::high_resolution_clock::now();
-    auto TimeNow = TimeStart;
+    while (!ExitFlag) {
 
-    uint32_t TestCounter = 0;
-
-    while (true) {
+    	// Keyboard commands
         fd_set KeyboardReadFds;
         FD_ZERO(&KeyboardReadFds);
         FD_SET(STDIN_FILENO, &KeyboardReadFds);
@@ -113,50 +83,18 @@ int main() {
         if (KeyboardState > 0 && FD_ISSET(STDIN_FILENO, &KeyboardReadFds)) {
             char KeyCode;
             if (read(STDIN_FILENO, &KeyCode, 1) == 1) {
-                std::cout << "Pressed: " << (int)KeyCode;
-                if (0 != isprint(KeyCode)){
-                	std::cout << " " << KeyCode;
-                }
-                std::cout << "\n";
         		if ((27 == KeyCode) || ('q' == KeyCode) || (1 == KeyCode)){  // Esc, q, Ctrl+A
                     break;
                 }
-        		if ((' ' <= KeyCode) && (KeyCode <= 'z')){
-        			char* FoundCharacterPtr = strchr( KeybordCharacters, KeyCode );
-
-        			if (FoundCharacterPtr != nullptr){
-            			int Index = FoundCharacterPtr - KeybordCharacters;
-            			assert( Index < FRAMES_NUMBER );
-
-            			int n = write(SerialDevice, FrameInfoTable[Index].outgoingFramePtr, FrameInfoTable[Index].outgoingFrameLength );
-        				TimeStart = std::chrono::high_resolution_clock::now();
-        				TestCounter = 0;
-        				TotalReceivedBytes = 0;
-            			if (FrameInfoTable[Index].outgoingFrameLength == n){
-            				std::cout << "Frame sent successfully";
-            			}
-            			else{
-                        	std::cout << "Error sending frame";
-            			}
-        				std::cout << " (";
-        				for (int J=0; J < FrameInfoTable[Index].outgoingFrameLength; J++){
-        					std::cout << (char)(((FrameInfoTable[Index].outgoingFramePtr[J] >= ' ') && (FrameInfoTable[Index].outgoingFramePtr[J] <= 'z'))?
-        							FrameInfoTable[Index].outgoingFramePtr[J] : '.');
-        				}
-        				std::cout << ")" << std::endl;
-        			}
-        		}
             }
         }
 
+        // Reading from the serial port and sending response
         fd_set SerialReadFds;
 		FD_ZERO(&SerialReadFds);
 		FD_SET(SerialDevice, &SerialReadFds);
-
 		struct timeval SerialTimeout = { 0, 0 };
-
 		int SerialPortState = select(SerialDevice + 1, &SerialReadFds, nullptr, nullptr, &SerialTimeout);
-
 		if (SerialPortState == -1) {
 			std::cerr << "Error: select()" << std::endl;
 			break;
@@ -165,36 +103,43 @@ int main() {
 			char ReceivedBytes[1000];
 			int NumberOfReceived = read(SerialDevice, &ReceivedBytes[0], sizeof(ReceivedBytes));
 			assert( NumberOfReceived <= sizeof(ReceivedBytes));
+			if (NumberOfReceived > 0) {
 
-			if ((NumberOfReceived > 0) && (TotalReceivedBytes + (uint16_t)NumberOfReceived < MAX_RESPONSE_LENGTH-2)) {
+				// Sending the echo
+				int WrittenBytes = write(SerialDevice, &ReceivedBytes[0], NumberOfReceived );
+				if (WrittenBytes != NumberOfReceived){
+					std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
+					ExitFlag = true;
+					break;
+				}
+
 				for (int J=0; J < NumberOfReceived; J++){
-					TotalResponse[TotalReceivedBytes] = ReceivedBytes[J];
+					TotalCommand[TotalReceivedBytes] = ReceivedBytes[J];
+
+					if (WaitingForNewCommand && ('\r' == ReceivedBytes[J])){
+						WaitingForNewCommand = false;
+
+						int OutgoingBytes = snprintf( &OutgoingResponse[0], sizeof(OutgoingResponse)-1, "It will be the answer here" );
+						int WrittenBytes = write(SerialDevice, &OutgoingResponse[0], OutgoingBytes );
+						if (WrittenBytes != OutgoingBytes){
+							std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
+							ExitFlag = true;
+							break;
+						}
+						// Reset the state machine that receives commands and executes them
+						TotalReceivedBytes = 0;
+						WaitingForNewCommand = true;
+						break; // exits the “for...” loop
+					}
+
+					if (TotalReceivedBytes > MAX_COMMAND_LENGTH-2){
+						std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
+						ExitFlag = true;
+						break;
+					}
+
 					TotalReceivedBytes++;
 				}
-				TotalResponse[TotalReceivedBytes] = 0;
-
-				TimeNow = std::chrono::high_resolution_clock::now();
-				auto Duration = std::chrono::duration_cast<std::chrono::milliseconds>(TimeNow - TimeStart);
-				std::cout << "Time " << std::dec << Duration.count() << "ms " << "\tRec " << NumberOfReceived << " [" << TotalReceivedBytes << "]  ";
-				for (int J=0; J < NumberOfReceived; J++){
-					std::cout << std::hex << ((unsigned)ReceivedBytes[J]) % 256u << " ";
-				}
-				std::cout << "\t";
-				for (int J=0; J < TotalReceivedBytes; J++){
-					if (10 == TotalResponse[J]){
-						std::cout << "\\n";
-					}
-					else if (13 == TotalResponse[J]){
-						std::cout << "\\r";
-					}
-					else if ((' ' <= TotalResponse[J]) || ('z' >= TotalResponse[J])){
-						std::cout << TotalResponse[J];
-					}
-					else{
-						std::cout << (char)128;
-					}
-				}
-				std::cout << std::endl;
 			}
 			else if (NumberOfReceived == -1) {
 				std::cerr << "Error: read()" << std::endl;
@@ -204,11 +149,10 @@ int main() {
 			}
 		}
 		else{
-			// There is nothing to do
+			// There is nothing to do but wait
 		}
 
-        usleep(100);
-        TestCounter++;
+        usleep(10);
     }
 
 	close( SerialDevice );
