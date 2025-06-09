@@ -7,6 +7,7 @@
 #include <sys/select.h>
 #include <inttypes.h>
 #include <assert.h>
+#include <string.h>
 
 //.................................................................................................
 // Preprocessor directives
@@ -25,17 +26,26 @@
 // Local constants
 //.................................................................................................
 
+static const char InquiryForSerialNumber[] = "?M\r\n";
+static const char InquiryForCurrentMeasurement[] = "MCX\r\n";
+
 //.................................................................................................
 // Local variables
 //.................................................................................................
 
 static int SerialDevice;
+static char* RstlIdentifier;
+
+static double SimulationCurrentValue = 0.02;
+static uint16_t SimulationCurrentUnsignedValue;
 
 //.................................................................................................
 // Local function prototypes
 //.................................................................................................
 
 static int configureSerialPort(const char *DeviceName);
+
+static int prepareResponse( char* OutputString, int OutputMaxLength, char* Command );
 
 //........................................................................................................
 // Main function definition
@@ -45,9 +55,10 @@ int main(int argc, char** argv) {
 	bool ExitFlag = false;
 	bool WaitingForNewCommand = true;
 	bool IsNewCommand = false;
-	uint16_t TotalReceivedBytes;
+	uint16_t TotalReceivedBytes = 0;
 	char TotalCommand[MAX_COMMAND_LENGTH];
 	char OutgoingResponse[1000];
+	uint16_t TimeDivider = 0;
 
 	// Serial port sutup
     for (int J = 1; J < argc; J++) {
@@ -63,6 +74,7 @@ int main(int argc, char** argv) {
 		std::cout << "Port not opened" << std::endl;
 		return 0;
 	}
+	RstlIdentifier = argv[2];
 
 	// Keyboard reading setup
 	struct termios oldSettings, newSettings;
@@ -104,7 +116,6 @@ int main(int argc, char** argv) {
 			int NumberOfReceived = read(SerialDevice, &ReceivedBytes[0], sizeof(ReceivedBytes));
 			assert( NumberOfReceived <= sizeof(ReceivedBytes));
 			if (NumberOfReceived > 0) {
-
 				// Sending the echo
 				int WrittenBytes = write(SerialDevice, &ReceivedBytes[0], NumberOfReceived );
 				if (WrittenBytes != NumberOfReceived){
@@ -112,14 +123,20 @@ int main(int argc, char** argv) {
 					ExitFlag = true;
 					break;
 				}
-
+				// reading byte by byte
 				for (int J=0; J < NumberOfReceived; J++){
 					TotalCommand[TotalReceivedBytes] = ReceivedBytes[J];
-
-					if (WaitingForNewCommand && ('\r' == ReceivedBytes[J])){
+					// check if there is a complete command
+					if (WaitingForNewCommand && ('\n' == ReceivedBytes[J])){
 						WaitingForNewCommand = false;
+						// command response
+						int OutgoingBytes = prepareResponse( &OutgoingResponse[0], sizeof(OutgoingResponse)-1, TotalCommand );
+						if (OutgoingBytes < 0){
+							std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
+							ExitFlag = true;
+							break;
+						}
 
-						int OutgoingBytes = snprintf( &OutgoingResponse[0], sizeof(OutgoingResponse)-1, "It will be the answer here" );
 						int WrittenBytes = write(SerialDevice, &OutgoingResponse[0], OutgoingBytes );
 						if (WrittenBytes != OutgoingBytes){
 							std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
@@ -129,7 +146,7 @@ int main(int argc, char** argv) {
 						// Reset the state machine that receives commands and executes them
 						TotalReceivedBytes = 0;
 						WaitingForNewCommand = true;
-						break; // exits the “for...” loop
+						break; // exits the "for..." loop
 					}
 
 					if (TotalReceivedBytes > MAX_COMMAND_LENGTH-2){
@@ -150,6 +167,26 @@ int main(int argc, char** argv) {
 		}
 		else{
 			// There is nothing to do but wait
+		}
+
+		if (0 == TimeDivider){
+			TimeDivider = 256;
+
+			double SimulationRandomFloat = drand48() - 0.5;
+			for(int J=0;J<9;J++){
+				SimulationRandomFloat += drand48() - 0.5;
+			}
+			SimulationRandomFloat *= SimulationCurrentValue/150.0; // The value of the constant was picked experimentally
+			double SimulationTemporaryValue = SimulationCurrentValue + SimulationRandomFloat;
+			if (SimulationTemporaryValue < 0){
+				SimulationCurrentUnsignedValue = 0;
+			}
+			else{
+				SimulationCurrentUnsignedValue = (uint16_t)SimulationTemporaryValue;
+			}
+		}
+		else{
+			TimeDivider--;
 		}
 
         usleep(10);
@@ -205,4 +242,34 @@ static int configureSerialPort(const char *DeviceName){
     return FileHandler;
 }
 
+static int prepareResponse( char* OutputString, int OutputMaxLength, char* Command ){
+	int Result = -1;
+
+	if (0 == strncmp( Command, InquiryForSerialNumber, sizeof(InquiryForSerialNumber)-1)){
+		Result = snprintf( &OutputString[0], OutputMaxLength, "\n\r%s\r\n\nCommand>", RstlIdentifier );
+		if (Result > OutputMaxLength){
+			std::cerr << "Error " << __FILE__ << " " << __LINE__ << std::endl;
+			Result = -1;
+		}
+	}
+	else if (0 == strncmp( Command, InquiryForCurrentMeasurement, sizeof(InquiryForCurrentMeasurement)-1)){
+		Result = snprintf( &OutputString[0], OutputMaxLength, "\n\rCurrent = %04X\r\n\nCommand>", SimulationCurrentUnsignedValue );
+		if (Result > OutputMaxLength){
+			Result = -1;
+		}
+	}
+	else{
+		int CommandLength = strlen(Command);
+		if (CommandLength < MAX_COMMAND_LENGTH-1){
+			if (('P' == Command[0]) && ('C' == Command[1]) && ('\r' == Command[CommandLength-2]) && ('\n' == Command[CommandLength-1])){
+				char* EndPtr;
+				double CommandSetPoint = strtof( &Command[2], &EndPtr );
+
+				std::cout << "CommandSetPoint " << CommandSetPoint << " " << (int)(EndPtr-Command) << " " << CommandLength << std::endl;
+
+			}
+		}
+	}
+	return Result;
+}
 

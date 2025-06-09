@@ -1,0 +1,13 @@
+# picocom --baudrate 300 --flow none --parity none --databits 8 --stopbits 1 /dev/ttyS0
+# exit: ctrl-x
+picocom -b 300 -f n -y n -d 8 -p 1 /dev/ttyS0
+
+picocom -b 150 -f n -y n -d 8 -p 1 --omap lfcrlf /dev/ttyS4
+
+picocom -b 600 -f n -y n -d 8 -p 1 /dev/ttyS0
+
+picocom -b 150 -f n -y n -d 8 -p 1 --omap lfcrlf /dev/ttyS4
+
+picocom -b 4800 -f n -y n -d 8 -p 1 --omap lfcrlf /dev/ttyS4
+
+
