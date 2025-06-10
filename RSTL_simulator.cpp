@@ -18,7 +18,7 @@
 #define RSTL_HARDWARE_SPEED			B4800
 #define TEXT_HARDWARE_SPEED			"4800"
 
-#define FRAMES_NUMBER				11
+#define FRAMES_NUMBER				12
 
 #define MAX_RESPONSE_LENGTH			100
 
@@ -46,6 +46,7 @@ static const uint8_t FrameToBeSent08[] = "PC0\r\n";		// 8 Program Current to...
 static const uint8_t FrameToBeSent09[] = "PC0.2\r\n";	// 9 Program Current to...
 static const uint8_t FrameToBeSent10[] = "PC1\r\n";		// 0 Program Current to...
 static const uint8_t FrameToBeSent11[] = "PC1.1\r\n";	// ! Program Current to...
+static const uint8_t FrameToBeSent12[] = "PC100\r\n";	// ! Program Current to...
 
 static const FrameInfo FrameInfoTable[FRAMES_NUMBER] = {
 		{	FrameToBeSent01,	sizeof(FrameToBeSent01)-1	},
@@ -58,11 +59,12 @@ static const FrameInfo FrameInfoTable[FRAMES_NUMBER] = {
 		{	FrameToBeSent08,	sizeof(FrameToBeSent08)-1	},
 		{	FrameToBeSent09,	sizeof(FrameToBeSent09)-1	},
 		{	FrameToBeSent10,	sizeof(FrameToBeSent10)-1	},
-		{	FrameToBeSent11,	sizeof(FrameToBeSent11)-1	}};
+		{	FrameToBeSent11,	sizeof(FrameToBeSent11)-1	},
+		{	FrameToBeSent12,	sizeof(FrameToBeSent12)-1	}};
 
 static_assert( FRAMES_NUMBER == (int)(sizeof(FrameInfoTable)/sizeof(FrameInfoTable[0])));
 
-static char KeybordCharacters[] = "1234567890!";
+static char KeybordCharacters[] = "1234567890!@";
 
 //.................................................................................................
 // Local variables
