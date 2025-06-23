@@ -18,7 +18,7 @@
 #define RSTL_HARDWARE_SPEED			B4800
 #define TEXT_HARDWARE_SPEED			"4800"
 
-#define FRAMES_NUMBER				12
+#define FRAMES_NUMBER				24
 
 #define MAX_RESPONSE_LENGTH			100
 
@@ -35,18 +35,36 @@ typedef struct FrameInfoStruct{
 // Local constants
 //.................................................................................................
 
-static const uint8_t FrameToBeSent01[] = "?M\r\n";	// 1 Place Software Revision, Model and Serial number
-static const uint8_t FrameToBeSent02[] = "?O\r\n";	// 2 Local or remote operation
-static const uint8_t FrameToBeSent03[] = "?S\r\n";	// 3 Previous command string
-static const uint8_t FrameToBeSent04[] = "?C\r\n";	// 4 Current DAC programming value (decimal)
-static const uint8_t FrameToBeSent05[] = "?CX\r\n";	// 5 Current DAC programming value (hex)
-static const uint8_t FrameToBeSent06[] = "MC\r\n";	// 6 measure output current and return result in Amps format
-static const uint8_t FrameToBeSent07[] = "MCX\r\n";	// 7 measure output current and return result in hex format
-static const uint8_t FrameToBeSent08[] = "PC0\r\n";		// 8 Program Current to...
-static const uint8_t FrameToBeSent09[] = "PC0.2\r\n";	// 9 Program Current to...
-static const uint8_t FrameToBeSent10[] = "PC1\r\n";		// 0 Program Current to...
-static const uint8_t FrameToBeSent11[] = "PC1.1\r\n";	// ! Program Current to...
-static const uint8_t FrameToBeSent12[] = "PC100\r\n";	// ! Program Current to...
+static const uint8_t FrameToBeSent01[] = "PC0\r\n";		// 1 Program Current to...
+static const uint8_t FrameToBeSent02[] = "PC0.2\r\n";	// 2 Program Current to...
+static const uint8_t FrameToBeSent03[] = "PC1\r\n";		// 3 Program Current to...
+static const uint8_t FrameToBeSent04[] = "PC2.1\r\n";	// 4 Program Current to...
+static const uint8_t FrameToBeSent05[] = "PC5.1\r\n";	// 5 Program Current to...
+
+static const uint8_t FrameToBeSent06[] = "PCX10\r\n";	// 8 DAC 0x010
+static const uint8_t FrameToBeSent07[] = "PCX20\r\n";	// 9 DAC 0x020
+
+static const uint8_t FrameToBeSent08[] = "?M\r\n";		// A Place Software Revision, Model and Serial number
+static const uint8_t FrameToBeSent09[] = "MC\r\n";		// B measure output current and return result in Amps format
+static const uint8_t FrameToBeSent10[] = "MCX\r\n";		// C measure output current and return result in hex format
+static const uint8_t FrameToBeSent11[] = "?C\r\n";		// D Current DAC programming value (decimal)
+static const uint8_t FrameToBeSent12[] = "?CX\r\n";		// E Current DAC programming value (hex)
+static const uint8_t FrameToBeSent13[] = "?O\r\n";		// F Local or remote operation
+
+static const uint8_t FrameToBeSent14[] = "?VL\r\n";		// G limit
+static const uint8_t FrameToBeSent15[] = "?VLX\r\n";	// H
+static const uint8_t FrameToBeSent16[] = "?CL\r\n";		// I
+static const uint8_t FrameToBeSent17[] = "?CLX\r\n";	// J
+
+static const uint8_t FrameToBeSent18[] = "?VL\r\n";		// K
+static const uint8_t FrameToBeSent19[] = "?CL\r\n";		// L
+
+static const uint8_t FrameToBeSent20[] = "?TV\r\n";		// M trimming
+static const uint8_t FrameToBeSent21[] = "?TC\r\n";		// N
+
+static const uint8_t FrameToBeSent22[] = "SR\r\n";		// ! Remote operation
+static const uint8_t FrameToBeSent23[] = "SB1\r\n";		// @ Echo on
+static const uint8_t FrameToBeSent24[] = "SM0\r\n";		// # Short output
 
 static const FrameInfo FrameInfoTable[FRAMES_NUMBER] = {
 		{	FrameToBeSent01,	sizeof(FrameToBeSent01)-1	},
@@ -60,11 +78,25 @@ static const FrameInfo FrameInfoTable[FRAMES_NUMBER] = {
 		{	FrameToBeSent09,	sizeof(FrameToBeSent09)-1	},
 		{	FrameToBeSent10,	sizeof(FrameToBeSent10)-1	},
 		{	FrameToBeSent11,	sizeof(FrameToBeSent11)-1	},
-		{	FrameToBeSent12,	sizeof(FrameToBeSent12)-1	}};
+		{	FrameToBeSent12,	sizeof(FrameToBeSent12)-1	},
+		{	FrameToBeSent13,	sizeof(FrameToBeSent13)-1	},
+		{	FrameToBeSent14,	sizeof(FrameToBeSent14)-1	},
+		{	FrameToBeSent15,	sizeof(FrameToBeSent15)-1	},
+		{	FrameToBeSent16,	sizeof(FrameToBeSent16)-1	},
+		{	FrameToBeSent17,	sizeof(FrameToBeSent17)-1	},
+		{	FrameToBeSent18,	sizeof(FrameToBeSent18)-1	},
+		{	FrameToBeSent19,	sizeof(FrameToBeSent19)-1	},
+		{	FrameToBeSent20,	sizeof(FrameToBeSent20)-1	},
+		{	FrameToBeSent21,	sizeof(FrameToBeSent21)-1	},
+		{	FrameToBeSent22,	sizeof(FrameToBeSent22)-1	},
+		{	FrameToBeSent23,	sizeof(FrameToBeSent23)-1	},
+		{	FrameToBeSent24,	sizeof(FrameToBeSent24)-1	},
+};
 
 static_assert( FRAMES_NUMBER == (int)(sizeof(FrameInfoTable)/sizeof(FrameInfoTable[0])));
 
-static char KeybordCharacters[] = "1234567890!@";
+//                                 123456789012345678901234567890
+static char KeybordCharacters[] = "1234589ABCDEFGHIJKLMN!@#";
 
 //.................................................................................................
 // Local variables

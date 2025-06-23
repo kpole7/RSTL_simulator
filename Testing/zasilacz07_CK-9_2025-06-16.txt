@@ -1,0 +1,197 @@
+krzysztof:~/LocalSoftware/RSTL_protocol_master/RSTL_simulator$ ./RSTL_simulator 
+Port open and configured; handler=3  baudrate=4800
+Pressed: 65 A
+Frame sent successfully (?M..)
+Time 50ms 	Rec 16 [16]  52 65 76 20 33 2e 30 35 20 52 53 54 4c 20 31 35 	Rev 3.05 RSTL 15
+Time 84ms 	Rec 16 [32]  2d 33 30 30 20 53 65 72 69 61 6c 20 39 37 4a 2d 	Rev 3.05 RSTL 15-300 Serial 97J-
+Time 118ms 	Rec 12 [44]  37 39 32 39 d a a 3e d a a 3e 	Rev 3.05 RSTL 15-300 Serial 97J-7929\r\n\n>\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 551ms 	Rec 12 [12]  30 2e 32 32 d a a 3e d a a 3e 	0.22\r\n\n>\r\n\n>
+Pressed: 43 C
+Frame sent successfully (MCX..)
+Time 585ms 	Rec 12 [12]  30 30 33 30 d a a 3e d a a 3e 	0030\r\n\n>\r\n\n>
+Pressed: 44 D
+Frame sent successfully (?C..)
+Time 49ms 	Rec 16 [16]  50 43 75 72 72 65 6e 74 20 3d 20 30 2e 30 30 30 	PCurrent = 0.000
+Time 86ms 	Rec 13 [29]  20 41 6d 70 73 d a a 3e d a a 3e 	PCurrent = 0.000 Amps\r\n\n>\r\n\n>
+Pressed: 45 E
+Frame sent successfully (?CX..)
+Time 46ms 	Rec 16 [16]  50 43 75 72 72 65 6e 74 20 3d 20 30 30 30 d a 	PCurrent = 000\r\n
+Time 68ms 	Rec 6 [22]  a 3e d a a 3e 	PCurrent = 000\r\n\n>\r\n\n>
+Pressed: 46 F
+Frame sent successfully (?O..)
+Time 37ms 	Rec 9 [9]  52 d a a 3e d a a 3e 	R\r\n\n>\r\n\n>
+Pressed: 46 F
+Frame sent successfully (?O..)
+Time 37ms 	Rec 9 [9]  52 d a a 3e d a a 3e 	R\r\n\n>\r\n\n>
+Pressed: 47 G
+Frame sent successfully (?VL..)
+Time 53ms 	Rec 16 [16]  50 56 6f 6c 74 61 67 65 20 4c 69 6d 69 74 20 3d 	PVoltage Limit =
+Time 87ms 	Rec 16 [32]  20 31 35 2e 30 30 30 20 56 6f 6c 74 73 d a a 	PVoltage Limit = 15.000 Volts\r\n\n
+Time 107ms 	Rec 5 [37]  3e d a a 3e 	PVoltage Limit = 15.000 Volts\r\n\n>\r\n\n>
+Pressed: 48 H
+Frame sent successfully (?VLX..)
+Time 49ms 	Rec 16 [16]  50 56 6f 6c 74 61 67 65 20 4c 69 6d 69 74 20 3d 	PVoltage Limit =
+Time 83ms 	Rec 12 [28]  20 66 66 66 d a a 3e d a a 3e 	PVoltage Limit = fff\r\n\n>\r\n\n>
+Pressed: 49 I
+Frame sent successfully (?CL..)
+Time 55ms 	Rec 16 [16]  50 43 75 72 72 65 6e 74 20 4c 69 6d 69 74 20 3d 	PCurrent Limit =
+Time 89ms 	Rec 16 [32]  20 33 30 30 2e 30 30 30 20 41 6d 70 73 d a a 	PCurrent Limit = 300.000 Amps\r\n\n
+Time 109ms 	Rec 5 [37]  3e d a a 3e 	PCurrent Limit = 300.000 Amps\r\n\n>\r\n\n>
+Pressed: 4a J
+Frame sent successfully (?CLX..)
+Time 49ms 	Rec 16 [16]  50 43 75 72 72 65 6e 74 20 4c 69 6d 69 74 20 3d 	PCurrent Limit =
+Time 84ms 	Rec 12 [28]  20 66 66 66 d a a 3e d a a 3e 	PCurrent Limit = fff\r\n\n>\r\n\n>
+Pressed: 4b K
+Frame sent successfully (?VL..)
+Time 53ms 	Rec 16 [16]  50 56 6f 6c 74 61 67 65 20 4c 69 6d 69 74 20 3d 	PVoltage Limit =
+Time 87ms 	Rec 16 [32]  20 31 35 2e 30 30 30 20 56 6f 6c 74 73 d a a 	PVoltage Limit = 15.000 Volts\r\n\n
+Time 107ms 	Rec 5 [37]  3e d a a 3e 	PVoltage Limit = 15.000 Volts\r\n\n>\r\n\n>
+Pressed: 4c L
+Frame sent successfully (?CL..)
+Time 55ms 	Rec 16 [16]  50 43 75 72 72 65 6e 74 20 4c 69 6d 69 74 20 3d 	PCurrent Limit =
+Time 89ms 	Rec 16 [32]  20 33 30 30 2e 30 30 30 20 41 6d 70 73 d a a 	PCurrent Limit = 300.000 Amps\r\n\n
+Time 109ms 	Rec 5 [37]  3e d a a 3e 	PCurrent Limit = 300.000 Amps\r\n\n>\r\n\n>
+Pressed: 4d M
+Frame sent successfully (?TV..)
+Time 50ms 	Rec 16 [16]  31 20 39 33 20 39 34 20 30 31 61 36 20 62 61 32 	1 93 94 01a6 ba2
+Time 78ms 	Rec 9 [25]  33 d a a 3e d a a 3e 	1 93 94 01a6 ba23\r\n\n>\r\n\n>
+Pressed: 4d M
+Frame sent successfully (?TV..)
+Time 50ms 	Rec 16 [16]  31 20 39 33 20 39 34 20 30 31 61 36 20 62 61 32 	1 93 94 01a6 ba2
+Time 78ms 	Rec 9 [25]  33 d a a 3e d a a 3e 	1 93 94 01a6 ba23\r\n\n>\r\n\n>
+Pressed: 4e N
+Frame sent successfully (?TC..)
+Time 50ms 	Rec 16 [16]  31 20 35 64 20 61 35 20 30 30 35 65 20 66 37 66 	1 5d a5 005e f7f
+Time 78ms 	Rec 9 [25]  37 d a a 3e d a a 3e 	1 5d a5 005e f7f7\r\n\n>\r\n\n>
+Pressed: 4e N
+Frame sent successfully (?TC..)
+Time 50ms 	Rec 16 [16]  31 20 35 64 20 61 35 20 30 30 35 65 20 66 37 66 	1 5d a5 005e f7f
+Time 78ms 	Rec 9 [25]  37 d a a 3e d a a 3e 	1 5d a5 005e f7f7\r\n\n>\r\n\n>
+Pressed: 21 !
+Frame sent successfully (SR..)
+Time 36ms 	Rec 8 [8]  d a a 3e d a a 3e 	\r\n\n>\r\n\n>
+Pressed: 40 @
+Frame sent successfully (SB1..)
+Time 41ms 	Rec 10 [10]  d a a 3e a d d a a 3e 	\r\n\n>\n\r\r\n\n>
+Pressed: 23 #
+Frame sent successfully (SM0..)
+Time 35ms 	Rec 11 [11]  53 4d 30 d a a d d a a 3e 	SM0\r\n\n\r\r\n\n>
+Pressed: 46 F
+Frame sent successfully (?O..)
+Time 35ms 	Rec 11 [11]  3f 4f d a a d 52 d a a 3e 	?O\r\n\n\rR\r\n\n>
+Pressed: 33 3
+Frame sent successfully (PC1..)
+Time 27ms 	Rec 7 [7]  50 43 31 d a a d 	PC1\r\n\n\r
+Time 54ms 	Rec 4 [11]  d a a 3e 	PC1\r\n\n\r\r\n\n>
+Pressed: 34 4
+Frame sent successfully (PC2.1..)
+Time 31ms 	Rec 9 [9]  50 43 32 2e 31 d a a d 	PC2.1\r\n\n\r
+Time 59ms 	Rec 4 [13]  d a a 3e 	PC2.1\r\n\n\r\r\n\n>
+Pressed: 35 5
+Frame sent successfully (PC5.1..)
+Time 31ms 	Rec 9 [9]  50 43 35 2e 31 d a a d 	PC5.1\r\n\n\r
+Time 60ms 	Rec 4 [13]  d a a 3e 	PC5.1\r\n\n\r\r\n\n>
+Pressed: 34 4
+Frame sent successfully (PC2.1..)
+Time 31ms 	Rec 9 [9]  50 43 32 2e 31 d a a d 	PC2.1\r\n\n\r
+Time 59ms 	Rec 4 [13]  d a a 3e 	PC2.1\r\n\n\r\r\n\n>
+Pressed: 33 3
+Frame sent successfully (PC1..)
+Time 27ms 	Rec 7 [7]  50 43 31 d a a d 	PC1\r\n\n\r
+Time 54ms 	Rec 4 [11]  d a a 3e 	PC1\r\n\n\r\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 24ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 627ms 	Rec 8 [14]  31 2e 33 30 d a a 3e 	MC\r\n\n\r1.30\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 24ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 501ms 	Rec 8 [14]  31 2e 32 39 d a a 3e 	MC\r\n\n\r1.29\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 509ms 	Rec 8 [14]  31 2e 33 30 d a a 3e 	MC\r\n\n\r1.30\r\n\n>
+Pressed: 34 4
+Frame sent successfully (PC2.1..)
+Time 31ms 	Rec 9 [9]  50 43 32 2e 31 d a a d 	PC2.1\r\n\n\r
+Time 59ms 	Rec 4 [13]  d a a 3e 	PC2.1\r\n\n\r\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 533ms 	Rec 8 [14]  32 2e 34 34 d a a 3e 	MC\r\n\n\r2.44\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 474ms 	Rec 8 [14]  32 2e 34 34 d a a 3e 	MC\r\n\n\r2.44\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 499ms 	Rec 8 [14]  32 2e 34 34 d a a 3e 	MC\r\n\n\r2.44\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 24ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 541ms 	Rec 8 [14]  32 2e 34 35 d a a 3e 	MC\r\n\n\r2.45\r\n\n>
+Pressed: 35 5
+Frame sent successfully (PC5.1..)
+Time 31ms 	Rec 9 [9]  50 43 35 2e 31 d a a d 	PC5.1\r\n\n\r
+Time 60ms 	Rec 4 [13]  d a a 3e 	PC5.1\r\n\n\r\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 657ms 	Rec 8 [14]  35 2e 35 34 d a a 3e 	MC\r\n\n\r5.54\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 24ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 573ms 	Rec 8 [14]  35 2e 35 34 d a a 3e 	MC\r\n\n\r5.54\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 611ms 	Rec 8 [14]  35 2e 35 33 d a a 3e 	MC\r\n\n\r5.53\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 578ms 	Rec 8 [14]  35 2e 35 34 d a a 3e 	MC\r\n\n\r5.54\r\n\n>
+Pressed: 32 2
+Frame sent successfully (PC0.2..)
+Time 31ms 	Rec 9 [9]  50 43 30 2e 32 d a a d 	PC0.2\r\n\n\r
+Time 59ms 	Rec 4 [13]  d a a 3e 	PC0.2\r\n\n\r\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 625ms 	Rec 8 [14]  30 2e 34 36 d a a 3e 	MC\r\n\n\r0.46\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 562ms 	Rec 8 [14]  30 2e 34 35 d a a 3e 	MC\r\n\n\r0.45\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 25ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 617ms 	Rec 8 [14]  30 2e 34 35 d a a 3e 	MC\r\n\n\r0.45\r\n\n>
+Pressed: 31 1
+Frame sent successfully (PC0..)
+Time 27ms 	Rec 7 [7]  50 43 30 d a a d 	PC0\r\n\n\r
+Time 54ms 	Rec 4 [11]  d a a 3e 	PC0\r\n\n\r\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 24ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 527ms 	Rec 8 [14]  30 2e 32 32 d a a 3e 	MC\r\n\n\r0.22\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 24ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 630ms 	Rec 8 [14]  30 2e 32 32 d a a 3e 	MC\r\n\n\r0.22\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 24ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 587ms 	Rec 8 [14]  30 2e 32 32 d a a 3e 	MC\r\n\n\r0.22\r\n\n>
+Pressed: 42 B
+Frame sent successfully (MC..)
+Time 24ms 	Rec 6 [6]  4d 43 d a a d 	MC\r\n\n\r
+Time 586ms 	Rec 8 [14]  30 2e 32 32 d a a 3e 	MC\r\n\n\r0.22\r\n\n>
+Pressed: 1b
+Port closed
+krzysztof:~/LocalSoftware/RSTL_protocol_master/RSTL_simulator$ 
+
+
+
