@@ -26,7 +26,7 @@
 // Local constants
 //.................................................................................................
 
-static const char InquiryForSerialNumber[] = "?M\r\n";
+static const char InquiryForSerialNumber[]       = "?M\r\n";
 static const char InquiryForCurrentMeasurement[] = "MC\r\n";
 
 //.................................................................................................
@@ -55,6 +55,8 @@ static int prepareResponse( char* OutputString, int OutputMaxLength, char* Comma
 //........................................................................................................
 
 int main(int argc, char** argv) {
+	uint32_t Counter1;
+	uint64_t Clocks1, Clocks2;
 	bool ExitFlag = false;
 	bool WaitingForNewCommand = true;
 	bool IsNewCommand = false;
@@ -70,7 +72,8 @@ int main(int argc, char** argv) {
        	std::cout << "argument " << J << " [" << Argument << "]" << std::endl;
     }
     if ( 3 != argc ){
-    	std::cout << "Syntax error; example of a program call:  ./RSTL_simulator /dev/ttyS0 \"Rev 3.05 RSTL 7.5-300 Serial 97H-7004\"" << std::endl;
+    	std::cout << "Syntax error; example of a program call:  ./RSTL_simulator /dev/ttyS0 \"Rev 3.05 RSTL 15-300 Serial 97J-7929\"" << std::endl;
+//    	std::cout << "Syntax error; example of a program call:  ./RSTL_simulator /dev/ttyS0 \"Rev 3.05 RSTL 7.5-300 Serial 97H-7004\"" << std::endl;
     	return 0;
     }
 	SerialDevice = configureSerialPort( argv[1] );
@@ -160,6 +163,24 @@ int main(int argc, char** argv) {
 						WaitingForNewCommand = false;
 						TotalCommand[TotalReceivedBytes+1] = 0;
 						// command response
+#if 1
+						std::cout << "->  ";
+						for (int J=0; J < TotalReceivedBytes; J++){
+							if (10 == TotalCommand[J]){
+								std::cout << "\\n";
+							}
+							else if (13 == TotalCommand[J]){
+								std::cout << "\\r";
+							}
+							else if ((' ' <= TotalCommand[J]) || ('z' >= TotalCommand[J])){
+								std::cout << TotalCommand[J];
+							}
+							else{
+								std::cout << (char)128;
+							}
+						}
+						std::cout << std::endl;
+#endif
 						int OutgoingBytes = prepareResponse( &OutgoingResponse[0], sizeof(OutgoingResponse)-1, TotalCommand );
 						if (OutgoingBytes < 0){
 							std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
@@ -173,6 +194,24 @@ int main(int argc, char** argv) {
 							ExitFlag = true;
 							break;
 						}
+#if 1
+						std::cout << " <- ";
+						for (int J=0; J < OutgoingBytes; J++){
+							if (10 == OutgoingResponse[J]){
+								std::cout << "\\n";
+							}
+							else if (13 == OutgoingResponse[J]){
+								std::cout << "\\r";
+							}
+							else if ((' ' <= OutgoingResponse[J]) || ('z' >= OutgoingResponse[J])){
+								std::cout << OutgoingResponse[J];
+							}
+							else{
+								std::cout << (char)128;
+							}
+						}
+						std::cout << std::endl;
+#endif
 						// Reset the state machine that receives commands and executes them
 						TotalReceivedBytes = 0;
 						WaitingForNewCommand = true;
@@ -218,9 +257,22 @@ int main(int argc, char** argv) {
 			}
 		}
 		else{
+#if 0
+			if (100 == TimeDivider){
+				Clocks1 = clock();
+				time_t now = time(NULL);
+				std::cout << Counter1 << "    clock= " << Clocks1 << "  dif= " << " (" << (uint64_t)(Clocks1/CLOCKS_PER_SEC) << ") " << Clocks1-Clocks2 << "  time= " << (uint32_t)now << " " << ctime(&now);
+			}
+			if (101 == TimeDivider){
+				Clocks2 = clock();
+				time_t now = time(NULL);
+				std::cout << Counter1 << "    clock= " << Clocks2 << "  dif= " << " (" << (uint64_t)(Clocks2/CLOCKS_PER_SEC) << ") "<< Clocks2-Clocks1 << "  time= " << (uint32_t)now << " " << ctime(&now);
+			}
+#endif
 			TimeDivider--;
 		}
 
+		Counter1++;
         usleep(10);
     }
 
