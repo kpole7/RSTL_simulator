@@ -34,6 +34,7 @@ static const char CommandSetRemote[]             = "SR\r\n";
 static const char CommandSetEchoOn[]             = "SB1\r\n";
 static const char CommandSetShortOutput[]        = "SM0\r\n";
 
+static const char EchoOnPrefix[]				 = "\n\r";
 
 //.................................................................................................
 // Local variables
@@ -227,7 +228,6 @@ int main(int argc, char** argv) {
 					if (WaitingForNewCommand && ('\n' == ReceivedBytes[J])){
 						WaitingForNewCommand = false;
 						TotalCommand[TotalReceivedBytes+1] = 0;
-						// command response
 #if 1
 						std::cout << "->  ";
 						for (int J=0; J < TotalReceivedBytes; J++){
@@ -246,6 +246,20 @@ int main(int argc, char** argv) {
 						}
 						std::cout << std::endl;
 #endif
+
+						// command response
+						if (IsEchoOn || (0 == strncmp( TotalCommand, CommandSetEchoOn, sizeof(CommandSetEchoOn)-1))){
+							int WrittenBytes = write(SerialDevice, &EchoOnPrefix[0], 2 );
+							if (WrittenBytes != 2){
+								std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
+								ExitFlag = true;
+								break;
+							}
+						}
+						if (0 == strncmp( TotalCommand, InquiryForCurrentMeasurement, sizeof(InquiryForCurrentMeasurement)-1)){
+					        usleep(600000LU);
+						}
+
 						int OutgoingBytes = prepareResponse( &OutgoingResponse[0], sizeof(OutgoingResponse)-1, TotalCommand );
 						if (OutgoingBytes < 0){
 							std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
@@ -393,109 +407,71 @@ static int configureSerialPort(const char *DeviceName){
 
 static int prepareResponse( char* OutputString, int OutputMaxLength, char* Command ){
 	int Result = 0;
-	static char InternalStringValue[MAX_COMMAND_LENGTH];
-	static char InternalStringVerbosity[MAX_COMMAND_LENGTH];
+	static char InternalCharacter;
 
 	if (0 == strncmp( Command, InquiryForSerialNumber, sizeof(InquiryForSerialNumber)-1)){
 		if (IsShortOutput){
-			Result = snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, "%s\r\n\n>", RstlIdentifier );
+			Result = snprintf( &OutputString[0], OutputMaxLength, "%s\r\n\n>", RstlIdentifier );
 		}
 		else{
-			Result = snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, "%s\r\n\nCommand>", RstlIdentifier );
+			Result = snprintf( &OutputString[0], OutputMaxLength, "%s\r\n\nCommand>", RstlIdentifier );
 		}
 		if (Result > OutputMaxLength){
 			std::cerr << "Error " << __FILE__ << " " << __LINE__ << std::endl;
 			Result = -1;
 		}
-		if (IsEchoOn){
-			Result = snprintf( &OutputString[0], OutputMaxLength, "\n\r%s", InternalStringVerbosity );
-		}
-		else{
-			Result = snprintf( &OutputString[0], OutputMaxLength, "%s", InternalStringVerbosity );
-		}
 	}
 	else if (0 == strncmp( Command, InquiryForCurrentMeasurement, sizeof(InquiryForCurrentMeasurement)-1)){
 		if (IsShortOutput){
-			snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, "%.2f\r\n\n>", SimulationNoisyCurrentValue );
+			Result = snprintf( &OutputString[0], OutputMaxLength, "%.2f\r\n\n>", SimulationNoisyCurrentValue );
 		}
 		else{
-			snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, "Current = %.2f Amps \r\n\nCommand>", SimulationNoisyCurrentValue );
-		}
-		if (IsEchoOn){
-			Result = snprintf( &OutputString[0], OutputMaxLength, "\n\r%s", InternalStringVerbosity );
-		}
-		else{
-			Result = snprintf( &OutputString[0], OutputMaxLength, "%s", InternalStringVerbosity );
+			Result = snprintf( &OutputString[0], OutputMaxLength, "Current = %.2f Amps \r\n\nCommand>", SimulationNoisyCurrentValue );
 		}
 	}
 	else if (0 == strncmp( Command, InquiryForOperationMode, sizeof(InquiryForOperationMode)-1)){
 		if (IsRemoteOperationMode){
-			snprintf( &InternalStringValue[0], MAX_COMMAND_LENGTH-1, "R" );
+			InternalCharacter = 'R';
 		}
 		else{
-			snprintf( &InternalStringValue[0], MAX_COMMAND_LENGTH-1, "L" );
+			InternalCharacter = 'L';
 		}
 		if (IsShortOutput){
-			(void)snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, "%s\r\n\n>", InternalStringValue );
+			Result = snprintf( &OutputString[0], OutputMaxLength, "%c\r\n\n>", InternalCharacter );
 		}
 		else{
-			(void)snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, "%s operation\r\n\nCommand>", InternalStringValue );
-		}
-		if (IsEchoOn){
-			Result = snprintf( &OutputString[0], OutputMaxLength, "\n\r%s", InternalStringVerbosity );
-		}
-		else{
-			Result = snprintf( &OutputString[0], OutputMaxLength, "%s", InternalStringVerbosity );
+			Result = snprintf( &OutputString[0], OutputMaxLength, "%c operation\r\n\nCommand>", InternalCharacter );
 		}
 	}
 	else if (0 == strncmp( Command, InquiryForCurrentDac, sizeof(InquiryForCurrentDac)-1)){
 		if (IsShortOutput){
-			snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, "PCurrent = %.3f Amps\r\n\n>", SimulationSetPointValue );
+			Result = snprintf( &OutputString[0], OutputMaxLength, "PCurrent = %.3f Amps\r\n\n>", SimulationSetPointValue );
 		}
 		else{
-			snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, "PCurrent = %.3f Amps\r\n\nCommand>", SimulationSetPointValue );
-		}
-		if (IsEchoOn){
-			Result = snprintf( &OutputString[0], OutputMaxLength, "\n\r%s", InternalStringVerbosity );
-		}
-		else{
-			Result = snprintf( &OutputString[0], OutputMaxLength, "%s", InternalStringVerbosity );
+			Result = snprintf( &OutputString[0], OutputMaxLength, "PCurrent = %.3f Amps\r\n\nCommand>", SimulationSetPointValue );
 		}
 	}
 	else if (0 == strncmp( Command, CommandSetRemote, sizeof(CommandSetRemote)-1)){
 		IsRemoteOperationMode = true;
 		if (IsShortOutput){
-			snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, ">\r\n\n>" );
+			Result = snprintf( &OutputString[0], OutputMaxLength, ">\r\n\n>" );
 		}
 		else{
-			snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, ">\r\n\nCommand>" );
-		}
-		if (IsEchoOn){
-			Result = snprintf( &OutputString[0], OutputMaxLength, "\n\r%s", InternalStringVerbosity );
-		}
-		else{
-			Result = snprintf( &OutputString[0], OutputMaxLength, "%s", InternalStringVerbosity );
+			Result = snprintf( &OutputString[0], OutputMaxLength, ">\r\n\nCommand>" );
 		}
 	}
 	else if (0 == strncmp( Command, CommandSetEchoOn, sizeof(CommandSetEchoOn)-1)){
 		IsEchoOn = true;
 		if (IsShortOutput){
-			snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, ">\n\r\r\n\n>" );
+			Result = snprintf( &OutputString[0], OutputMaxLength, ">\n\r\r\n\n>" );
 		}
 		else{
-			snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, ">\n\r\r\n\nCommand>" );
+			Result = snprintf( &OutputString[0], OutputMaxLength, ">\n\r\r\n\nCommand>" );
 		}
-		Result = snprintf( &OutputString[0], OutputMaxLength, "\n\r%s", InternalStringVerbosity );
 	}
 	else if (0 == strncmp( Command, CommandSetShortOutput, sizeof(CommandSetShortOutput)-1)){
 		IsShortOutput = true;
-		snprintf( &InternalStringVerbosity[0], MAX_COMMAND_LENGTH-1, "\r\r\n\n>" );
-		if (IsEchoOn){
-			Result = snprintf( &OutputString[0], OutputMaxLength, "\n\r%s", InternalStringVerbosity );
-		}
-		else{
-			Result = snprintf( &OutputString[0], OutputMaxLength, "%s", InternalStringVerbosity );
-		}
+		Result = snprintf( &OutputString[0], OutputMaxLength, "\r\r\n\n>" );
 	}
 	else{
 		int CommandLength = strlen(Command);
@@ -518,7 +494,12 @@ static int prepareResponse( char* OutputString, int OutputMaxLength, char* Comma
 				std::cout << "CommandSetPoint " << CommandSetPoint << " " << (int)(EndPtr-Command) << " " << CommandLength << std::endl;
 #endif
 				if ((int)(EndPtr-Command)+2 == CommandLength){ // Check if the number format is correct
-					Result = snprintf( &OutputString[0], OutputMaxLength, "\n\r\r\n\nCommand>" );
+					if (IsShortOutput){
+						Result = snprintf( &OutputString[0], OutputMaxLength, "\r\n\n>" );
+					}
+					else{
+						Result = snprintf( &OutputString[0], OutputMaxLength, "\r\n\nCommand>" );
+					}
 					if (Result > OutputMaxLength){
 						Result = -1;
 					}
