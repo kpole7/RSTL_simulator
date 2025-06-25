@@ -13,6 +13,9 @@
 // Preprocessor directives
 //.................................................................................................
 
+#define SERIAL_PORTS_ARE_VIRTUAL	1
+#define VIRTUAL_PORT_DELAY			2500 // us
+
 #define RSTL_HARDWARE_SPEED			B4800
 #define TEXT_HARDWARE_SPEED			"4800"
 
@@ -215,12 +218,24 @@ int main(int argc, char** argv) {
 			assert( NumberOfReceived <= sizeof(ReceivedBytes));
 			if (NumberOfReceived > 0) {
 				// Sending the echo
+#if 0 == SERIAL_PORTS_ARE_VIRTUAL
 				int WrittenBytes = write(SerialDevice, &ReceivedBytes[0], NumberOfReceived );
 				if (WrittenBytes != NumberOfReceived){
 					std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
 					ExitFlag = true;
 					break;
 				}
+#else
+				for (int J=0; J<NumberOfReceived; J++ ){
+					int WrittenBytes = write(SerialDevice, &ReceivedBytes[J], 1 );
+					if (WrittenBytes != 1){
+						std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
+						ExitFlag = true;
+						break;
+					}
+					 usleep( VIRTUAL_PORT_DELAY );
+				}
+#endif
 				// reading byte by byte
 				for (int J=0; J < NumberOfReceived; J++){
 					TotalCommand[TotalReceivedBytes] = ReceivedBytes[J];
@@ -249,12 +264,24 @@ int main(int argc, char** argv) {
 
 						// command response
 						if (IsEchoOn || (0 == strncmp( TotalCommand, CommandSetEchoOn, sizeof(CommandSetEchoOn)-1))){
+#if 0 == SERIAL_PORTS_ARE_VIRTUAL
 							int WrittenBytes = write(SerialDevice, &EchoOnPrefix[0], 2 );
 							if (WrittenBytes != 2){
 								std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
 								ExitFlag = true;
 								break;
 							}
+#else
+							for (int J=0; J<2; J++ ){
+								int WrittenBytes = write(SerialDevice, &EchoOnPrefix[J], 1 );
+								if (WrittenBytes != 1){
+									std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
+									ExitFlag = true;
+									break;
+								}
+								 usleep( VIRTUAL_PORT_DELAY );
+							}
+#endif
 						}
 						if (0 == strncmp( TotalCommand, InquiryForCurrentMeasurement, sizeof(InquiryForCurrentMeasurement)-1)){
 					        usleep(600000LU);
@@ -267,13 +294,26 @@ int main(int argc, char** argv) {
 							break;
 						}
 
+#if 0 == SERIAL_PORTS_ARE_VIRTUAL
 						int WrittenBytes = write(SerialDevice, &OutgoingResponse[0], OutgoingBytes );
 						if (WrittenBytes != OutgoingBytes){
 							std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
 							ExitFlag = true;
 							break;
 						}
-#if 1
+#else
+						for (int J=0; J<OutgoingBytes; J++ ){
+							int WrittenBytes = write(SerialDevice, &OutgoingResponse[J], 1 );
+							if (WrittenBytes != 1){
+								std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
+								ExitFlag = true;
+								break;
+							}
+							 usleep( VIRTUAL_PORT_DELAY );
+						}
+#endif
+
+#if 1 // debugging
 						std::cout << " <- ";
 						for (int J=0; J < OutgoingBytes; J++){
 							if (10 == OutgoingResponse[J]){
@@ -352,7 +392,7 @@ int main(int argc, char** argv) {
 		}
 
 		Counter1++;
-        usleep(10);
+        usleep(1000);
     }
 
 	close( SerialDevice );
