@@ -255,9 +255,9 @@ static int configureSerialPort(const char *DeviceName);
 int main(int argc, char** argv) {
 	uint16_t TotalReceivedBytes;
 	char TotalResponse[MAX_RESPONSE_LENGTH];
+	bool NewLineCharacter = false;
 
-
-	// Serial port sutup
+	// Serial port setup
     for (int J = 1; J < argc; J++) {
         std::string Argument = argv[J];
        	std::cout << "argument " << J << " [" << Argument << "]" << std::endl;
@@ -282,6 +282,7 @@ int main(int argc, char** argv) {
 
 	auto TimeStart = std::chrono::high_resolution_clock::now();
     auto TimeNow = TimeStart;
+    auto TimeBefore = TimeStart;
 
     uint32_t TestCounter = 0;
 
@@ -310,9 +311,9 @@ int main(int argc, char** argv) {
             			int Index = FoundCharacterPtr - KeybordCharacters;
             			assert( Index < FRAMES_NUMBER );
 
+            			TimeBefore = std::chrono::high_resolution_clock::now();
             			int n = write(SerialDevice, FrameInfoTable[Index].outgoingFramePtr, FrameInfoTable[Index].outgoingFrameLength );
         				TimeStart = std::chrono::high_resolution_clock::now();
-        				TestCounter = 0;
         				TotalReceivedBytes = 0;
             			if (FrameInfoTable[Index].outgoingFrameLength == n){
             				std::cout << "Frame sent successfully";
@@ -326,6 +327,7 @@ int main(int argc, char** argv) {
         							FrameInfoTable[Index].outgoingFramePtr[J] : '.');
         				}
         				std::cout << ")" << std::endl;
+        				TestCounter = 0;
         			}
         		}
             }
@@ -334,7 +336,6 @@ int main(int argc, char** argv) {
         fd_set SerialReadFds;
 		FD_ZERO(&SerialReadFds);
 		FD_SET(SerialDevice, &SerialReadFds);
-
 		struct timeval SerialTimeout = { 0, 0 };
 
 		int SerialPortState = select(SerialDevice + 1, &SerialReadFds, nullptr, nullptr, &SerialTimeout);
@@ -351,32 +352,47 @@ int main(int argc, char** argv) {
 			if ((NumberOfReceived > 0) && (TotalReceivedBytes + (uint16_t)NumberOfReceived < MAX_RESPONSE_LENGTH-2)) {
 				for (int J=0; J < NumberOfReceived; J++){
 					TotalResponse[TotalReceivedBytes] = ReceivedBytes[J];
+					if (TotalReceivedBytes > 0){
+						if (('\n' == TotalResponse[TotalReceivedBytes-1]) && ('>' == TotalResponse[TotalReceivedBytes])){
+							NewLineCharacter = true;
+						}
+					}
 					TotalReceivedBytes++;
 				}
 				TotalResponse[TotalReceivedBytes] = 0;
 
-				TimeNow = std::chrono::high_resolution_clock::now();
-				auto Duration = std::chrono::duration_cast<std::chrono::milliseconds>(TimeNow - TimeStart);
-				std::cout << "Time " << std::dec << Duration.count() << "ms " << "\tRec " << NumberOfReceived << " [" << TotalReceivedBytes << "]  ";
-				for (int J=0; J < NumberOfReceived; J++){
-					std::cout << std::hex << ((unsigned)ReceivedBytes[J]) % 256u << " ";
+				if (NewLineCharacter){
+					NewLineCharacter = false;
+					TimeNow = std::chrono::high_resolution_clock::now();
+					auto Duration = std::chrono::duration_cast<std::chrono::milliseconds>(TimeNow - TimeStart);
+					std::cout << "Time " << std::dec << Duration.count() << "ms ";
+#if 0
+					std::cout << "\tRec " << NumberOfReceived << " [" << TotalReceivedBytes << "]  ";
+					for (int J=0; J < NumberOfReceived; J++){
+						std::cout << std::hex << ((unsigned)ReceivedBytes[J]) % 256u << " ";
+					}
+#endif
+					std::cout << "\t";
+					for (int J=0; J < TotalReceivedBytes; J++){
+						if (10 == TotalResponse[J]){
+							std::cout << "\\n";
+						}
+						else if (13 == TotalResponse[J]){
+							std::cout << "\\r";
+						}
+						else if ((' ' <= TotalResponse[J]) || ('z' >= TotalResponse[J])){
+							std::cout << TotalResponse[J];
+						}
+						else{
+							std::cout << (char)128;
+						}
+					}
+
+					Duration = std::chrono::duration_cast<std::chrono::milliseconds>(TimeStart - TimeBefore);
+					std::cout << "  T=" << std::dec << Duration.count() << "ms";
+
+					std::cout << std::endl;
 				}
-				std::cout << "\t";
-				for (int J=0; J < TotalReceivedBytes; J++){
-					if (10 == TotalResponse[J]){
-						std::cout << "\\n";
-					}
-					else if (13 == TotalResponse[J]){
-						std::cout << "\\r";
-					}
-					else if ((' ' <= TotalResponse[J]) || ('z' >= TotalResponse[J])){
-						std::cout << TotalResponse[J];
-					}
-					else{
-						std::cout << (char)128;
-					}
-				}
-				std::cout << std::endl;
 			}
 			else if (NumberOfReceived == -1) {
 				std::cerr << "Error: read()" << std::endl;
