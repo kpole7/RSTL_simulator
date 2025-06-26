@@ -8,5 +8,6 @@
 *.o
 *.d
 RSTL_simulator
+RSTL_master
 
 
