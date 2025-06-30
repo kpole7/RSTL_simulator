@@ -9,145 +9,6 @@
 #include <inttypes.h>
 #include <assert.h>
 
-#if 0
-
-#define MAX_NUMBER_OF_SERIAL_PORTS				16
-
-#define MODBUS_RTU_REGISTERS_AREA				14
-
-
-#define TRANSMISSION_ERRORS_TABLE			16
-
-
-// This class relates to the status of the communication channel
-enum class CommunicationStatesClass{
-	PORT_NOT_OPEN		= 0,
-	WRONG_PHYSICAL_ID	= 1,
-	PERMANENT_ERRORS	= 2,
-	TEMPORARY_ERRORS	= 3,
-	HEALTHY				= 4		// there is a possibility of PSU physical Id incompatibility
-};
-
-enum class LastFrameErrorClass{
-	UNSPECIFIED			= 0,
-	NO_RESPONSE			= 1,
-	NOT_COMPLETE_FRAME	= 2,
-	BAD_CRC				= 3,
-	OTHER_FRAME_ERROR	= 4,
-	PERFECTION			= 5
-};
-
-enum class PoweringDownStatesClass{
-	INACTIVE				= 0,
-	CURRENT_DECELERATING	= 1,
-	TIMEOUT_EXCEEDED		= 2
-};
-
-enum class PoweringDownActionsClass{
-	NO_ACTION							= 0,
-	SET_NEW_STATE						= 1,
-	NEW_STATE_TAKE_ORDER				= 2,
-	NEW_STATE_PLACE_CURRENT_ZEROING		= 3,
-	NEW_STATE_PLACE_POWER_OFF			= 4
-};
-
-class TransmissionErrorsMonitor {
-private:
-	uint32_t TransmissionErrorsHistory[TRANSMISSION_ERRORS_TABLE]; // This is a bit field, where '1' = transmission error, '0' = correct response
-	uint16_t TransmissionErrorsHead;	// bit index, where a current value will be written
-	uint16_t TransmissionErrorsValue;	// percentage of errors
-	uint16_t TransmissionErrorsSequence;// the longest sequence of errors
-public:
-	TransmissionErrorsMonitor();
-	void addSampleAndCalculateStatistics(bool New);
-	uint16_t getErrorPerMille(void);
-	uint16_t getErrorMaxSequence(void);
-};
-
-
-// This class is associated with each power supply.
-// It represents the state of the serial link and the state of the power supply itself.
-// The number of objects of this type is specified in the configuration file.
-class TransmissionChannel {
-private:
-	uint16_t PowerSupplyExpectedId;
-	std::string PortName;
-	std::string Descriptor;
-	int SerialPortHandler;
-	uint8_t CommunicationConsecutiveErrors;
-	bool TransmissionAcknowledgement;
-	LastFrameErrorClass FrameLastError;
-	uint16_t ModbusRegisters[MODBUS_RTU_REGISTERS_AREA];
-	TransmissionErrorsMonitor CommunicationMonitor;
-	uint8_t PresentOrder;
-
-	// positive number: counting (from 0 upwards) from pressing the power supply shutdown button;
-	// negative number: inactive status
-	int16_t PoweringDownCounter;
-public:
-	TransmissionChannel();
-	~TransmissionChannel();
-	void open( int ChannelId );
-	void singleInquiryOfSlave( int ChannelId );
-	bool isOpen(void);
-	uint8_t getPhisicalIdOfPowerSupply(void);
-	PoweringDownActionsClass drivePoweringDownStateMachine( PoweringDownStatesClass *NewPoweringDownStatePtr,
-			bool PossibilityOfPsuShuttingdown, uint8_t PreviewedOrder );
-
-	friend uint8_t configurationFileParsing(void);
-};
-
-
-
-
-
-
-
-
-static TransmissionChannel TableOfTransmissionChannel[MAX_NUMBER_OF_SERIAL_PORTS];
-
-// This variable is used for time synchronization
-uint8_t FractionOfSecond;
-
-// Number of serial ports declared in the configuration file
-uint8_t NumberOfChannels;
-
-// This function is designed to be called several times per second to read information
-// about the status of the power supply unit and write a possible write command;
-// the function works as a Modbus RTU master
-void communicateAllPowerSources( void ){
-	uint8_t CurrentChannel;
-	assert( (0 != NumberOfChannels) && (NumberOfChannels <= MAX_NUMBER_OF_SERIAL_PORTS) );
-	for( CurrentChannel=0; CurrentChannel<NumberOfChannels; CurrentChannel++ ){
-		if(TableOfTransmissionChannel[CurrentChannel].isOpen()){
-			TableOfTransmissionChannel[CurrentChannel].singleInquiryOfSlave( CurrentChannel );
-		}
-		else{
-			if(0 == FractionOfSecond){
-				TableOfTransmissionChannel[CurrentChannel].open( CurrentChannel );
-			}
-		}
-	}
-}
-
-
-
-
-
-#endif
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //.................................................................................................
 // Preprocessor directives
@@ -283,6 +144,8 @@ int main(int argc, char** argv) {
 	auto TimeStart = std::chrono::high_resolution_clock::now();
     auto TimeNow = TimeStart;
     auto TimeBefore = TimeStart;
+
+    std::cout << "size of variable defined with:   std::chrono::high_resolution_clock::now()  = " << (int)sizeof(TimeStart) << std::endl;
 
     uint32_t TestCounter = 0;
 
