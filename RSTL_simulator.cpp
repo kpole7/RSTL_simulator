@@ -13,7 +13,6 @@
 // Preprocessor directives
 //.................................................................................................
 
-#define SERIAL_PORTS_ARE_VIRTUAL	1
 #define VIRTUAL_PORT_DELAY			2500 // us
 
 #define RSTL_HARDWARE_SPEED			B4800
@@ -60,6 +59,8 @@ static bool IsShortOutput(true);
 //.................................................................................................
 
 static int configureSerialPort(const char *DeviceName);
+
+static void debugPrintOut( char Character );
 
 static int prepareResponse( char* OutputString, int OutputMaxLength, char* Command );
 
@@ -216,16 +217,17 @@ int main(int argc, char** argv) {
 			char ReceivedBytes[1000];
 			int NumberOfReceived = read(SerialDevice, &ReceivedBytes[0], sizeof(ReceivedBytes));
 			assert( NumberOfReceived <= sizeof(ReceivedBytes));
+
+#if 1
+			std::cout << "->  ";
+			for (int J=0; J < NumberOfReceived; J++){
+				debugPrintOut(ReceivedBytes[J]);
+			}
+			std::cout << std::endl;
+#endif
 			if (NumberOfReceived > 0) {
 				// Sending the echo
-#if 0 == SERIAL_PORTS_ARE_VIRTUAL
-				int WrittenBytes = write(SerialDevice, &ReceivedBytes[0], NumberOfReceived );
-				if (WrittenBytes != NumberOfReceived){
-					std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
-					ExitFlag = true;
-					break;
-				}
-#else
+				std::cout << " 1<-  ";
 				for (int J=0; J<NumberOfReceived; J++ ){
 					int WrittenBytes = write(SerialDevice, &ReceivedBytes[J], 1 );
 					if (WrittenBytes != 1){
@@ -233,9 +235,10 @@ int main(int argc, char** argv) {
 						ExitFlag = true;
 						break;
 					}
-					 usleep( VIRTUAL_PORT_DELAY );
+					usleep( VIRTUAL_PORT_DELAY );
+					debugPrintOut( ReceivedBytes[J] );
 				}
-#endif
+				std::cout << std::endl;
 				// reading byte by byte
 				for (int J=0; J < NumberOfReceived; J++){
 					TotalCommand[TotalReceivedBytes] = ReceivedBytes[J];
@@ -243,35 +246,10 @@ int main(int argc, char** argv) {
 					if (WaitingForNewCommand && ('\n' == ReceivedBytes[J])){
 						WaitingForNewCommand = false;
 						TotalCommand[TotalReceivedBytes+1] = 0;
-#if 1
-						std::cout << "->  ";
-						for (int J=0; J < TotalReceivedBytes; J++){
-							if (10 == TotalCommand[J]){
-								std::cout << "\\n";
-							}
-							else if (13 == TotalCommand[J]){
-								std::cout << "\\r";
-							}
-							else if ((' ' <= TotalCommand[J]) || ('z' >= TotalCommand[J])){
-								std::cout << TotalCommand[J];
-							}
-							else{
-								std::cout << (char)128;
-							}
-						}
-						std::cout << std::endl;
-#endif
 
 						// command response
 						if (IsEchoOn || (0 == strncmp( TotalCommand, CommandSetEchoOn, sizeof(CommandSetEchoOn)-1))){
-#if 0 == SERIAL_PORTS_ARE_VIRTUAL
-							int WrittenBytes = write(SerialDevice, &EchoOnPrefix[0], 2 );
-							if (WrittenBytes != 2){
-								std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
-								ExitFlag = true;
-								break;
-							}
-#else
+							std::cout << " 2<-  ";
 							for (int J=0; J<2; J++ ){
 								int WrittenBytes = write(SerialDevice, &EchoOnPrefix[J], 1 );
 								if (WrittenBytes != 1){
@@ -279,9 +257,10 @@ int main(int argc, char** argv) {
 									ExitFlag = true;
 									break;
 								}
-								 usleep( VIRTUAL_PORT_DELAY );
+								usleep( VIRTUAL_PORT_DELAY );
+								debugPrintOut( EchoOnPrefix[J] );
 							}
-#endif
+							std::cout << std::endl;
 						}
 						if (0 == strncmp( TotalCommand, InquiryForCurrentMeasurement, sizeof(InquiryForCurrentMeasurement)-1)){
 					        usleep(600000LU);
@@ -294,50 +273,28 @@ int main(int argc, char** argv) {
 							break;
 						}
 
-#if 0 == SERIAL_PORTS_ARE_VIRTUAL
-						int WrittenBytes = write(SerialDevice, &OutgoingResponse[0], OutgoingBytes );
-						if (WrittenBytes != OutgoingBytes){
-							std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
-							ExitFlag = true;
-							break;
-						}
-#else
-						for (int J=0; J<OutgoingBytes; J++ ){
-							int WrittenBytes = write(SerialDevice, &OutgoingResponse[J], 1 );
-							if (WrittenBytes != 1){
-								std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
-								ExitFlag = true;
-								break;
+						if (OutgoingBytes > 0){
+							std::cout << " 3<-  ";
+							for (int J=0; J<OutgoingBytes; J++ ){
+								int WrittenBytes = write(SerialDevice, &OutgoingResponse[J], 1 );
+								if (WrittenBytes != 1){
+									std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
+									ExitFlag = true;
+									break;
+								}
+								usleep( VIRTUAL_PORT_DELAY );
+								debugPrintOut( OutgoingResponse[J] );
 							}
-							 usleep( VIRTUAL_PORT_DELAY );
+							std::cout << std::endl;
 						}
-#endif
 
-#if 1 // debugging
-						std::cout << " <- ";
-						for (int J=0; J < OutgoingBytes; J++){
-							if (10 == OutgoingResponse[J]){
-								std::cout << "\\n";
-							}
-							else if (13 == OutgoingResponse[J]){
-								std::cout << "\\r";
-							}
-							else if ((' ' <= OutgoingResponse[J]) || ('z' >= OutgoingResponse[J])){
-								std::cout << OutgoingResponse[J];
-							}
-							else{
-								std::cout << (char)128;
-							}
-						}
-						std::cout << std::endl;
-#endif
 						// Reset the state machine that receives commands and executes them
 						TotalReceivedBytes = 0;
 						WaitingForNewCommand = true;
 						break; // exits the "for..." loop
 					}
 
-					if (TotalReceivedBytes > MAX_COMMAND_LENGTH-2){
+					if (TotalReceivedBytes > MAX_COMMAND_LENGTH-3){
 						std::cout << "Exiting " << __FILE__ << ": " << __LINE__ << std::endl;
 						ExitFlag = true;
 						break;
@@ -511,7 +468,7 @@ static int prepareResponse( char* OutputString, int OutputMaxLength, char* Comma
 	}
 	else if (0 == strncmp( Command, CommandSetShortOutput, sizeof(CommandSetShortOutput)-1)){
 		IsShortOutput = true;
-		Result = snprintf( &OutputString[0], OutputMaxLength, "\r\r\n\n>" );
+		Result = snprintf( &OutputString[0], OutputMaxLength, "\r\n\n>" );
 	}
 	else{
 		int CommandLength = strlen(Command);
@@ -549,5 +506,20 @@ static int prepareResponse( char* OutputString, int OutputMaxLength, char* Comma
 		}
 	}
 	return Result;
+}
+
+static void debugPrintOut( char Character ){
+	if (10 == Character){
+		std::cout << "\\n";
+	}
+	else if (13 == Character){
+		std::cout << "\\r";
+	}
+	else if ((' ' <= Character) && ('z' >= Character)){
+		std::cout << Character;
+	}
+	else{
+		std::cout << (char)128;
+	}
 }
 
