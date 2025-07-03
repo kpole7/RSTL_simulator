@@ -197,6 +197,18 @@ int main(int argc, char** argv) {
                			std::cout << "verbose output" << std::endl;
             		}
             	}
+            	if ('0' == KeyCode){
+            		SimulationSetPointValue = 0.0;
+            	}
+            	if ('1' == KeyCode){
+            		SimulationSetPointValue = 1.0;
+            	}
+            	if ('2' == KeyCode){
+            		SimulationSetPointValue = 10.0;
+            	}
+            	if ('3' == KeyCode){
+            		SimulationSetPointValue = 100.0;
+            	}
         		if ((27 == KeyCode) || ('q' == KeyCode) || (1 == KeyCode)){  // Esc, q, Ctrl+A
                     break;
                 }
