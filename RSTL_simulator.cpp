@@ -116,6 +116,22 @@ int main(int argc, char** argv) {
         if (KeyboardState > 0 && FD_ISSET(STDIN_FILENO, &KeyboardReadFds)) {
             char KeyCode;
             if (read(STDIN_FILENO, &KeyCode, 1) == 1) {
+            	if ('h' == KeyCode){
+            		std::cout << "- - - - - Help - - - - -" << std::endl;
+            		std::cout << "f  fast transients" << std::endl;
+            		std::cout << "d  default transients" << std::endl;
+            		std::cout << "s  slow transients" << std::endl;
+            		std::cout << "p  toggle printouts of transients" << std::endl;
+            		std::cout << "v  toggle mode verbose/short" << std::endl;
+            		std::cout << "l  toggle mode local/remote" << std::endl;
+            		std::cout << "e  toggle echo on/off" << std::endl;
+            		std::cout << "r  randomize mode" << std::endl;
+            		std::cout << "m  mode settings" << std::endl;
+            		std::cout << "0  setpoint value = 0" << std::endl;
+            		std::cout << "1  setpoint value = 1" << std::endl;
+            		std::cout << "2  setpoint value = 10" << std::endl;
+            		std::cout << "3  setpoint value = 100" << std::endl;
+            	}
             	if ('f' == KeyCode){
             		SimulationTransientCoefficient1 = 0.05;
             		SimulationTransientCoefficient2 = 0.95;
@@ -197,17 +213,43 @@ int main(int argc, char** argv) {
                			std::cout << "verbose output" << std::endl;
             		}
             	}
+            	if ('m' == KeyCode){
+           			std::cout << "mode settings:  ";
+            		if (IsEchoOn){
+               			std::cout << "echo on; ";
+            		}
+            		else{
+               			std::cout << "echo off; ";
+            		}
+            		if (IsRemoteOperationMode){
+               			std::cout << "remote mode; ";
+            		}
+            		else{
+               			std::cout << "local mode; ";
+            		}
+            		if (IsShortOutput){
+               			std::cout << "short output; ";
+            		}
+            		else{
+               			std::cout << "verbose output; ";
+            		}
+           			std::cout << "  setpoint=" << SimulationSetPointValue << "A" << std::endl;
+            	}
             	if ('0' == KeyCode){
             		SimulationSetPointValue = 0.0;
+            		std::cout << "  setpoint=" << SimulationSetPointValue << "A" << std::endl;
             	}
             	if ('1' == KeyCode){
             		SimulationSetPointValue = 1.0;
+            		std::cout << "  setpoint=" << SimulationSetPointValue << "A" << std::endl;
             	}
             	if ('2' == KeyCode){
             		SimulationSetPointValue = 10.0;
+            		std::cout << "  setpoint=" << SimulationSetPointValue << "A" << std::endl;
             	}
             	if ('3' == KeyCode){
             		SimulationSetPointValue = 100.0;
+            		std::cout << "  setpoint=" << SimulationSetPointValue << "A" << std::endl;
             	}
         		if ((27 == KeyCode) || ('q' == KeyCode) || (1 == KeyCode)){  // Esc, q, Ctrl+A
                     break;
